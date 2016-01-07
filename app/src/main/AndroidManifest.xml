@@ -21,6 +21,7 @@
         <activity android:name=".Journey"></activity>
         <activity android:name=".JourneyAdapter"></activity>
         <activity android:name=".JourneyDB"></activity>
+        <activity android:name=".JourneyAdd"></activity>
         <activity android:name=".DBManager"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
