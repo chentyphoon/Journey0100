@@ -10,43 +10,38 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
 
+
 public class JourneyActivity extends AppCompatActivity {
 
+    //撈JourneyList
     private ListView lvJourney;
+    private List<Journey> journeys=null;
+    private JourneyAdapter journeyAdapter=null;
+    GlobalVariable globalVariable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.journey_main);
 
+        //抓全域變數uId
+        globalVariable = (GlobalVariable) getApplicationContext();
+        globalVariable.uId = "4"; //chentyphoon@yahoo.com.tw
+
+        //Set Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("旅程列表");
 
+        //撈JourneyList
+        getJourneyList();
 
-        
-
-        JourneyDB journeyDB = new JourneyDB();
-        lvJourney = (ListView) findViewById(R.id.lvJourney);
-        List<Journey> journeys = journeyDB.journeyList();
-        Log.d("get", journeys.toString());
-
-        //建立自定Adapter物件
-        JourneyAdapter journeyAdapter = new JourneyAdapter(this, journeys);
-        lvJourney.setAdapter(journeyAdapter);
-        Log.d("adaper", "after");
-
-
-
-
-
-
-
-
+        //點右下角按鈕觸發新增行程
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabAddJourney);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +54,28 @@ public class JourneyActivity extends AppCompatActivity {
             }
         });
 
+        //點ListView觸發檢視行程
+        lvJourney.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Journey j = (Journey) journeyAdapter.getItem(position);
+                String jId = j.getjId();
+                Log.d("JA getItem Jid",jId);
+                Intent myIntent = new Intent(JourneyActivity.this,JSubActivity.class);
+                myIntent.putExtra("jId", jId);
+                startActivity(myIntent);
 
+            }
+        });
+
+        lvJourney.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Journey j = (Journey) journeyAdapter.getItem(position);
+                String jId = j.getjId();
+                JourneyDB.deleteJourney(jId);
+                return false;
+            }
+        });
 
 
 
@@ -85,5 +101,31 @@ public class JourneyActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onRestart() {
+        getJourneyList();
+        //Log.d("JA status","restart");
+        super.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        //Log.d("JA status","resume");
+        super.onResume();
+    }
+    public void getJourneyList(){
+
+        lvJourney = (ListView) findViewById(R.id.lvJourney);
+        journeys = JourneyDB.journeyList(globalVariable.uId);
+        journeyAdapter = new JourneyAdapter(this, journeys);
+        //Log.d("get", journeys.toString());
+
+        //建立自定Adapter物件
+
+        lvJourney.setAdapter(journeyAdapter);
+        //Log.d("adaper", "after");
+
     }
 }

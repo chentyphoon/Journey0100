@@ -11,7 +11,7 @@ public class Journey {
         this.jName = jName;
     }
 
-    public String getJId(){
+    public String getjId(){
         return jId;
     }
 
@@ -19,7 +19,7 @@ public class Journey {
         return jName;
     }
 
-    public void setJName(String jName){
+    public void setjName(String jName){
         this.jName = jName;
     }
 }

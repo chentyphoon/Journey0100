@@ -44,9 +44,11 @@ public class JourneyAdapter extends BaseAdapter {
 
     private class viewHolder{
         ImageView ivjPic;
+        TextView txtjId;
         TextView txtjName;
-        public viewHolder(ImageView ivjPic, TextView txtjName){
+        public viewHolder(ImageView ivjPic, TextView txtjId,TextView txtjName){
             this.ivjPic = ivjPic;
+            this.txtjId = txtjId;
             this.txtjName = txtjName;
         }
     }
@@ -55,20 +57,20 @@ public class JourneyAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         viewHolder holder = null;
 
-        Log.d("getView=", "in");
+        //Log.d("getView=", "in");
         if (convertView == null) {
-            Log.d("convertView=", "null");
+            //Log.d("convertView=", "null");
             // 建立項目畫面元件
             convertView = inflater.inflate(R.layout.journey_item, null);
-            holder = new viewHolder((ImageView)convertView.findViewById(R.id.ivjPic), (TextView)convertView.findViewById(R.id.txtjName));
+            holder = new viewHolder((ImageView)convertView.findViewById(R.id.ivjPic), (TextView)convertView.findViewById(R.id.txtjId), (TextView)convertView.findViewById(R.id.txtjName));
             convertView.setTag(holder);
         }else {
             holder = (viewHolder) convertView.getTag();
-            Log.d("convertView=", "not null");
+            //Log.d("convertView=", "not null");
         }
 
         Journey journey = (Journey) getItem(position);
-
+        holder.txtjId.setText(journey.getjId());
         holder.txtjName.setText(journey.getjName());
 
         return convertView;
