@@ -27,6 +27,8 @@
         <activity android:name=".DBManager"></activity>
         <activity android:name=".JSubActivity"></activity>
 
+        <activity android:name=".MemberAdd"></activity>
+
 
 
 
