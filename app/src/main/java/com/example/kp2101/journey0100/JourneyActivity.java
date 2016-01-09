@@ -21,9 +21,8 @@ public class JourneyActivity extends AppCompatActivity {
     private ListView lvJourney;
     private List<Journey> journeys=null;
     private JourneyAdapter journeyAdapter=null;
-
-
     GlobalVariable globalVariable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -8,4 +8,6 @@ import android.app.Application;
 
 public class GlobalVariable extends Application {
     public String uId = "";
+    public String jId = "";
+    public String jName = "";
 }

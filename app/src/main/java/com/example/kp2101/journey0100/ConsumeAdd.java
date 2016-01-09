@@ -12,17 +12,19 @@ import android.widget.Toast;
 /**
  * Created by KP2101 on 2016/1/7.
  */
-public class MemberAdd extends AppCompatActivity {
+public class ConsumeAdd extends AppCompatActivity {
 
-    Button btnAddU;
-    EditText edtUId;
-    String uId;
+    Button btnAddC;
+    EditText edtCName;
+    EditText edtCDollar;
+    String cName;
+    String cDollar;
     GlobalVariable globalVariable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.member_add);
+        setContentView(R.layout.consume_add);
 
 
         globalVariable = (GlobalVariable)getApplicationContext();
@@ -30,19 +32,21 @@ public class MemberAdd extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("新增成員");
+        getSupportActionBar().setTitle("新增");
 
-        btnAddU = (Button) findViewById(R.id.btnAddU);
-        edtUId = (EditText) findViewById(R.id.edtUId);
+        btnAddC = (Button) findViewById(R.id.btnAddC);
+        edtCName = (EditText) findViewById(R.id.edtCName);
+        edtCDollar = (EditText) findViewById(R.id.edtCDollar);
 
 
-        btnAddU.setOnClickListener(new View.OnClickListener() {
+        btnAddC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uId = edtUId.getText().toString();
-                Log.d("uId=",uId);
-                MemberDB.addMemberToJourney(uId,globalVariable.jId);
-                Toast.makeText(MemberAdd.this,"新增成功",Toast.LENGTH_LONG).show();
+                cName = edtCName.getText().toString();
+                cDollar = edtCDollar.getText().toString();
+
+                ConsumeDB.addConsume(globalVariable.jId,cName,cDollar);
+                Toast.makeText(ConsumeAdd.this,"新增成功",Toast.LENGTH_LONG).show();
                 finish();
             }
         });

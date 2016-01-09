@@ -7,13 +7,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 
 /**
  * Created by TonyLabNew on 2016/1/8.
  */
 public class JSubActivity extends AppCompatActivity {
-    String jId;
     String jName;
 
 
@@ -22,16 +22,13 @@ public class JSubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jsub_main);
 
-        //抓全域變數uId
+        //抓全域變數
         GlobalVariable globalVariable = (GlobalVariable)getApplicationContext();
 
         //抓上一個activity傳來的jId
-        jId = getIntent().getExtras().getString("jId");
+        globalVariable.jId = getIntent().getExtras().getString("jId");
         jName = getIntent().getExtras().getString("jName");
 
-        //把jId傳到fragment，用bundle綁
-        Bundle bundle = new Bundle();
-        bundle.putString("jId",jId);
 
         //Set Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -46,7 +43,7 @@ public class JSubActivity extends AppCompatActivity {
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
-                (getSupportFragmentManager(), tabLayout.getTabCount(), bundle);//多傳bundle
+                (getSupportFragmentManager(), tabLayout.getTabCount());//多傳bundle
         viewPager.setAdapter(adapter);
 
 

@@ -8,11 +8,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
-    private final Bundle atofdata;
-    public PagerAdapter(FragmentManager fm, int NumOfTabs, Bundle data) {
+
+    public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
-        atofdata = data;
+
     }
 
     @Override
@@ -21,11 +21,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         switch (position) {
             case 0:
                 MemberActivity tab1 = new MemberActivity();
-                tab1.setArguments(this.atofdata);
                 return tab1;
             case 1:
                 ConsumeActivity tab2 = new ConsumeActivity();
-                tab2.setArguments(this.atofdata);
                 return tab2;
             default:
                 return null;

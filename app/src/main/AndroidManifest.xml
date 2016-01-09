@@ -28,6 +28,7 @@
         <activity android:name=".JSubActivity"></activity>
 
         <activity android:name=".MemberAdd"></activity>
+        <activity android:name=".ConsumeAdd"></activity>
 
 
 
