@@ -31,11 +31,6 @@ public class ConsumeDB {
         Log.d("addConsume",sql2);
         dbManager.DBexecuteUpdate(sql2);
 
-
-
-
-
-
         //String sql4 = "INSERT INTO userjourney (jId,uId) VALUES ("+id+","+uId+");";
         //Log.d("addJourney sql2",sql2);
         //dbManager.DBexecuteUpdate(sql2);

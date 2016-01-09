@@ -13,14 +13,14 @@ import java.util.List;
 /**
  * Created by KP2101 on 2016/1/6.
  */
-public class MemberAdapter extends BaseAdapter {
+public class ConsumeMemberAdapter extends BaseAdapter {
 
     private List<Member> members;
     private LayoutInflater inflater;
 
     //private int resource;
 
-    public MemberAdapter(Context context, List<Member> members) {
+    public ConsumeMemberAdapter(Context context, List<Member> members) {
 
         inflater = LayoutInflater.from(context);
         this.members = members;
@@ -60,7 +60,9 @@ public class MemberAdapter extends BaseAdapter {
         if (convertView == null) {
             //Log.d("convertView=", "null");
             // 建立項目畫面元件
-            convertView = inflater.inflate(R.layout.member_item, null);
+            convertView = inflater.inflate(R.layout.member_item_for_consume, null);
+
+
             holder = new viewHolder((ImageView)convertView.findViewById(R.id.ivuPic), (TextView)convertView.findViewById(R.id.txtuId), (TextView)convertView.findViewById(R.id.txtuName));
             convertView.setTag(holder);
         }else {

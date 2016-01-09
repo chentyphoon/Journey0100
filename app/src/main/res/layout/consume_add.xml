@@ -54,6 +54,15 @@
                 android:id="@+id/edtCDollar" />
 
         </LinearLayout>
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvMember" />
+
+
+
+
+
 
         <LinearLayout
             android:orientation="horizontal"
@@ -67,4 +76,10 @@
                 android:id="@+id/btnAddC" />
         </LinearLayout>
     </LinearLayout>
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridView"
+        android:layout_gravity="right" />
 </LinearLayout>
