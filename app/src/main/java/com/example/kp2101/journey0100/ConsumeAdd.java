@@ -72,12 +72,16 @@ public class ConsumeAdd extends AppCompatActivity  implements
             public void afterTextChanged(Editable s) {
                 setNeed();
             }
+
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
         });
+
+
+
 
         //點確定觸發新增消費
         btnAddC.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +90,8 @@ public class ConsumeAdd extends AppCompatActivity  implements
                 cName = edtCName.getText().toString();
                 cDollar = Double.parseDouble(edtCDollar.getText().toString());
 
-                ConsumeDB.addConsume(globalVariable.jId, cName, cDollar);
+                String cId=ConsumeDB.addConsume(globalVariable.jId, cName, cDollar);
+                ConsumeDB.addUserConsume(cId,consumemembers);
                 Toast.makeText(ConsumeAdd.this,"新增成功",Toast.LENGTH_LONG).show();
                 finish();
             }
@@ -125,6 +130,9 @@ public class ConsumeAdd extends AppCompatActivity  implements
         }
     }
 
+
+
+
     //重新分配每個member的應付金額
     public void setNeed(){
         //Log.d("checkmember", checkmember.toString());
@@ -145,11 +153,17 @@ public class ConsumeAdd extends AppCompatActivity  implements
                 consumemembers.get(pos).setNeed(0.0);
             }
         }
+        refreshList();
 
+
+    }
+    public void refreshList(){
         //更新list
         List<ConsumeMember> cmNew = new ArrayList<ConsumeMember>();
         cmNew.addAll(consumemembers);
         consumememberAdapter.updateReceiptsList(cmNew);
     }
+
+
 
 }

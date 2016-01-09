@@ -1,6 +1,8 @@
 package com.example.kp2101.journey0100;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -42,7 +45,6 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
     public void updateReceiptsList(List<ConsumeMember> newlist) {
         consumemembers.clear();
         consumemembers.addAll(newlist);
-        Log.d("updatefunction addall", String.valueOf(consumemembers.get(0).getNeed()));
         this.notifyDataSetChanged();
     }
 
@@ -75,6 +77,8 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final int pos1=position;
+        final View v=convertView;
         viewHolder holder = null;
 
         //Log.d("getView=", "in");
@@ -95,7 +99,7 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
             //Log.d("convertView=", "not null");
         }
 
-        ConsumeMember consumemember = (ConsumeMember) getItem(position);
+        final ConsumeMember consumemember = (ConsumeMember) getItem(position);
 
         holder.txtuId.setText(consumemember.getuId());
         holder.txtuName.setText(consumemember.getuName());
@@ -103,6 +107,44 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
         holder.edtPaid.setText(String.valueOf(consumemember.getPaid()));
         holder.cbNeed.setChecked(consumemember.isSelected());
         holder.cbNeed.setTag(consumemember);
+
+
+
+//        final EditText fedtNeed=holder.edtNeed;
+//        fedtNeed.addTextChangedListener(new TextWatcher() {
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before,
+//                                      int count) {
+//
+//                //Log.d("On text changed", s+",Start:"+start+",count:"+count+",before:"+before);
+//
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count,
+//                                          int after) {
+//                //Log.d("Before text changed", s+",Start:"+start+",count:"+count+",after:"+after);
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                Integer pos = (Integer)v.getTag();
+//                Log.d("get pos",String.valueOf(pos));
+//                if (s.length() != 0) {
+//                    double need = Double.parseDouble(s.toString());
+//                    //consumemember.setNeed(need);
+//                    consumemembers.get(pos).setNeed(need);
+//                    Log.d("textchange","pos="+pos+";need="+String.valueOf(consumemembers.get(pos).getNeed()));
+//                } else {
+//
+//                }
+//
+//            }
+//        });
+
+
 
         return convertView;
     }

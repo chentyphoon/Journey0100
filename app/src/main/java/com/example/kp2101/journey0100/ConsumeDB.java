@@ -22,15 +22,24 @@ public class ConsumeDB {
     public ConsumeDB(){
     }
 
-    public static void addConsume(String jId,String cName,Double cDollar){
+    public static String addConsume(String jId,String cName,Double cDollar){
         String sql = "INSERT INTO consume (cName,cDollar,jId) VALUES (\""+cName+"\",\""+cDollar+"\",\""+jId+"\");";
         Log.d("addConsume", sql);
         String id = dbManager.DBexecuteUpdate(sql);
-
-
-        //String sql4 = "INSERT INTO userjourney (jId,uId) VALUES ("+id+","+uId+");";
-        //Log.d("addJourney sql2",sql2);
-        //dbManager.DBexecuteUpdate(sql2);
+        return id;
+    }
+    public static void addUserConsume(String cId,List<ConsumeMember> consumemembers){
+        String uId;
+        String need;
+        String paid;
+        for(int pos=0;pos<consumemembers.size();pos++) {
+            uId=consumemembers.get(pos).getuId();
+            need=String.valueOf(consumemembers.get(pos).getNeed());
+            paid=String.valueOf(consumemembers.get(pos).getPaid());
+            String sql = "INSERT INTO userconsume (uId,cId,need,paid) VALUES (\""+uId+"\",\""+cId+"\",\""+need+"\",\""+paid+"\");";
+            Log.d("addUserConsume", sql);
+            dbManager.DBexecuteUpdate(sql);
+        }
 
     }
 
