@@ -6,8 +6,8 @@ package com.example.kp2101.journey0100;
 public class Consume {
     String cId;
     String cName;
-    String cDollar;
-    public Consume(String cId, String cName, String cDollar){
+    Double cDollar;
+    public Consume(String cId, String cName, Double cDollar){
         this.cId = cId;
         this.cName = cName;
         this.cDollar = cDollar;
@@ -17,7 +17,7 @@ public class Consume {
     public String getcName(){
         return cName;
     }
-    public String getcDollar(){
+    public Double getcDollar(){
         return cDollar;
     }
 

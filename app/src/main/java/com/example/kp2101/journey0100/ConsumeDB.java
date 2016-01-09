@@ -22,14 +22,11 @@ public class ConsumeDB {
     public ConsumeDB(){
     }
 
-    public static void addConsume(String jId,String cName,String cDollar){
-        String sql = "INSERT INTO consume (cName,cDollar) VALUES (\""+cName+"\",\""+cDollar+"\");";
-        Log.d("addConsume",sql);
+    public static void addConsume(String jId,String cName,Double cDollar){
+        String sql = "INSERT INTO consume (cName,cDollar,jId) VALUES (\""+cName+"\",\""+cDollar+"\",\""+jId+"\");";
+        Log.d("addConsume", sql);
         String id = dbManager.DBexecuteUpdate(sql);
 
-        String sql2 = "INSERT INTO journeyconsume (jid,cid) VALUES (\""+jId+"\",\""+id+"\");";
-        Log.d("addConsume",sql2);
-        dbManager.DBexecuteUpdate(sql2);
 
         //String sql4 = "INSERT INTO userjourney (jId,uId) VALUES ("+id+","+uId+");";
         //Log.d("addJourney sql2",sql2);
@@ -43,14 +40,14 @@ public class ConsumeDB {
     }
 
     public static List<Consume> consumeList(String jId){
-        String sql="SELECT * FROM journeyconsume  NATURAL JOIN consume where jId=\""+jId+"\"";
+        String sql="SELECT * FROM  consume where jId=\""+jId+"\"";
         Log.d("consumeList sql",sql);
         ResultSet resultSet = dbManager.DBexecute(sql);
 
         List<Consume> consumeList = new ArrayList<Consume>();
         try {
             while (resultSet.next()){
-                Consume consume = new Consume(resultSet.getString("cId"), resultSet.getString("cName"), resultSet.getString("cDollar"));
+                Consume consume = new Consume(resultSet.getString("cId"), resultSet.getString("cName"), resultSet.getDouble("cDollar"));
                 consumeList.add(consume);
             }
             //dbManager.statement.close();

@@ -40,7 +40,7 @@ public class MemberDB {
 
     public static List<Member> memberList(String jId){
         String sql="SELECT * FROM userjourney  NATURAL JOIN user where jId=\""+jId+"\"";
-        Log.d("memberList sql",sql);
+        Log.d("memberList sql", sql);
         ResultSet resultSet = dbManager.DBexecute(sql);
 
         List<Member> memberList = new ArrayList<Member>();
@@ -61,6 +61,32 @@ public class MemberDB {
         }
 
         return memberList;
+
+    }
+
+    public static List<ConsumeMember> consumeMemberAddList(String jId){
+        String sql="SELECT * FROM userjourney  NATURAL JOIN user where jId=\""+jId+"\"";
+        Log.d("memberList sql",sql);
+        ResultSet resultSet = dbManager.DBexecute(sql);
+
+        List<ConsumeMember> consumeMemberList = new ArrayList<ConsumeMember>();
+        try {
+            while (resultSet.next()){
+                ConsumeMember consumemember = new ConsumeMember(resultSet.getString("uId"), resultSet.getString("uName"));
+                consumeMemberList.add(consumemember);
+            }
+            //dbManager.statement.close();
+            //resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return consumeMemberList;
 
     }
 }
