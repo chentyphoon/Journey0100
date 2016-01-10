@@ -24,7 +24,7 @@ public class MemberDB {
 
     public static void addMemberToJourney(String uId,String jId){
         String sql = "INSERT INTO `userjourney` (uId,jId) VALUES ("+uId+","+jId+");";
-        Log.d("addMemberToJourney",sql);
+        //Log.d("addMemberToJourney",sql);
         dbManager.DBexecuteUpdate(sql);
 
         //String sql2 = "INSERT INTO userjourney (jId,uId) VALUES ("+id+","+uId+");";
@@ -41,7 +41,7 @@ public class MemberDB {
 
     public static Member memberMe(String jId,String uId){
         String sql="SELECT * FROM `userjourney`  NATURAL JOIN `user` where jId="+jId+" AND uId="+uId+"";
-        Log.d("memberMe sql", sql);
+        //Log.d("memberMe sql", sql);
         ResultSet resultSet = dbManager.DBexecute(sql);
         Member member = null;
         try {
@@ -91,7 +91,7 @@ public class MemberDB {
 
     public static List<ConsumeMember> consumeMemberAddList(String jId){
         String sql="SELECT * FROM userjourney  NATURAL JOIN user where jId=\""+jId+"\"";
-        Log.d("memberList sql",sql);
+        //Log.d("memberList sql",sql);
         ResultSet resultSet = dbManager.DBexecute(sql);
 
         List<ConsumeMember> consumeMemberList = new ArrayList<ConsumeMember>();

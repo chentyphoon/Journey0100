@@ -22,14 +22,14 @@ public class ImageSelector{
     final static int SELECT_PHOTO = 100;
     final static int CROP_OK = 111;
 
-    public ImageSelector(Context context){
-        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
-            GlobalVariable.cacheDir=new File(android.os.Environment.getExternalStorageDirectory(),"Journey");
-        else
-            GlobalVariable.cacheDir=context.getCacheDir();
-        if(!GlobalVariable.cacheDir.exists())
-            GlobalVariable.cacheDir.mkdirs();
-    }
+//    public ImageSelector(Context context){
+//        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
+//            GlobalVariable.cacheDir=new File(android.os.Environment.getExternalStorageDirectory(),"Journey");
+//        else
+//            GlobalVariable.cacheDir=context.getCacheDir();
+//        if(!GlobalVariable.cacheDir.exists())
+//            GlobalVariable.cacheDir.mkdirs();
+//    }
 
     public static Intent select() {
         Intent pickIntent = new Intent(Intent.ACTION_PICK, null);

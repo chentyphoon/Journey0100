@@ -18,6 +18,11 @@ public class FileCache {
             cacheDir=context.getCacheDir();
         if(!cacheDir.exists())
             cacheDir.mkdirs();
+
+    }
+
+    public File getCacheDir(){
+        return cacheDir;
     }
 
     public File getFile(String url){

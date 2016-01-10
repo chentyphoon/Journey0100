@@ -24,7 +24,7 @@ public class ConsumeDB {
 
     public static String addConsume(String jId,String cName,Double cDollar){
         String sql = "INSERT INTO `consume` (cName,cDollar,jId) VALUES ('"+cName+"',"+cDollar+","+jId+");";
-        Log.d("addConsume", sql);
+        //Log.d("addConsume", sql);
         String id = dbManager.DBexecuteUpdate(sql);
         return id;
     }
@@ -40,11 +40,11 @@ public class ConsumeDB {
             paid=String.valueOf(consumemembers.get(pos).getPaid());
 
             String sql = "INSERT INTO `userconsume` (uId,cId,need,paid) VALUES ("+uId+","+cId+","+need+","+paid+");";
-            Log.d("addUserConsume", sql);
+            //Log.d("addUserConsume", sql);
             dbManager.DBexecuteUpdate(sql);
 
             String sql2="SELECT * FROM  `userjourney` where `uId`="+uId+" AND jId="+jId+";";
-            Log.d("addUserConsume", sql2);
+            //Log.d("addUserConsume", sql2);
             ResultSet resultSet = dbManager.DBexecute(sql2);
             try {
                 while (resultSet.next()){
@@ -61,7 +61,7 @@ public class ConsumeDB {
 
 
             String sql3 = "UPDATE `userjourney` SET `ujMoney`="+pay+" WHERE `uId`="+uId+" AND `jId`="+jId+";";
-            Log.d("addUserConsume", sql3);
+            //Log.d("addUserConsume", sql3);
             dbManager.DBexecuteUpdate(sql3);
 
         }
@@ -75,7 +75,7 @@ public class ConsumeDB {
 
     public static List<Consume> consumeList(String jId){
         String sql="SELECT * FROM  `consume` where jId="+jId+"";
-        Log.d("consumeList sql",sql);
+        //Log.d("consumeList sql",sql);
         ResultSet resultSet = dbManager.DBexecute(sql);
 
         List<Consume> consumeList = new ArrayList<Consume>();
