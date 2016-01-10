@@ -1,5 +1,6 @@
 package com.example.kp2101.journey0100;
 
+import android.app.LauncherActivity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -77,8 +78,7 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int pos1=position;
-        final View v=convertView;
+
         viewHolder holder = null;
 
         //Log.d("getView=", "in");
@@ -92,6 +92,7 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
                     (TextView)convertView.findViewById(R.id.txtuName), (CheckBox)convertView.findViewById(R.id.cbNeed),
                     (EditText)convertView.findViewById(R.id.edtNeed),(EditText)convertView.findViewById(R.id.edtPaid));
             holder.cbNeed.setOnCheckedChangeListener((ConsumeAdd) context);
+
 
             convertView.setTag(holder);
         }else {
@@ -109,40 +110,62 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
         holder.cbNeed.setTag(consumemember);
 
 
+        //edtneed change listener
+        holder.edtNeed.setTag(consumemember);
+        holder.edtNeed.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    final int position = v.getId();
+                    final EditText Caption = (EditText) v;
+                    String val = Caption.getText().toString();  // you have the value here
+                    Log.d("after edit", val);
 
-//        final EditText fedtNeed=holder.edtNeed;
-//        fedtNeed.addTextChangedListener(new TextWatcher() {
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before,
-//                                      int count) {
-//
-//                //Log.d("On text changed", s+",Start:"+start+",count:"+count+",before:"+before);
-//
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count,
-//                                          int after) {
-//                //Log.d("Before text changed", s+",Start:"+start+",count:"+count+",after:"+after);
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                Integer pos = (Integer)v.getTag();
-//                Log.d("get pos",String.valueOf(pos));
-//                if (s.length() != 0) {
-//                    double need = Double.parseDouble(s.toString());
-//                    //consumemember.setNeed(need);
-//                    consumemembers.get(pos).setNeed(need);
-//                    Log.d("textchange","pos="+pos+";need="+String.valueOf(consumemembers.get(pos).getNeed()));
-//                } else {
-//
-//                }
-//
-//            }
-//        });
+                    if (val.compareTo("") != 0) {
+                        String tag = "";
+                        if (Caption.getTag() != null) {
+                            tag = Caption.getTag().toString();  // get the tag
+                        }
+                        Log.d("tag", tag);
+
+                        /* if you need to find the object associated with the editText*/
+                        for (int i = 0; i < consumemembers.size(); i++) {
+                            Log.d("consumemembers.get(i)", String.valueOf(consumemembers.get(i)));
+                            if (tag.compareToIgnoreCase(String.valueOf(consumemembers.get(i))) == 0) {
+                                consumemembers.get(i).setNeed(Double.parseDouble(val));
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        //edtpaid change listener
+        holder.edtPaid.setTag(consumemember);
+        holder.edtPaid.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    final int position = v.getId();
+                    final EditText Caption = (EditText) v;
+                    String val = Caption.getText().toString();  // you have the value here
+                    Log.d("after edit", val);
+
+                    if(val.compareTo("") !=0){
+                        String tag = "";
+                        if(Caption.getTag() != null){
+                            tag = Caption.getTag().toString();  // get the tag
+                        }
+                        Log.d("tag", tag);
+
+                        /* if you need to find the object associated with the editText*/
+                        for(int i=0; i<consumemembers.size(); i++){
+                            Log.d("consumemembers.get(i)", String.valueOf(consumemembers.get(i)));
+                            if(tag.compareToIgnoreCase(String.valueOf(consumemembers.get(i))) == 0){
+                                consumemembers.get(i).setPaid(Double.parseDouble(val));
+                            }
+                        }
+                    }
+                }
+            }
+        });
 
 
 

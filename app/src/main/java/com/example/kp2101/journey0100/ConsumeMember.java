@@ -42,7 +42,7 @@ public class ConsumeMember {
     public Double getPaid() {
         return paid;
     }
-    public void setPaid(Double paid){ this.need= paid; };
+    public void setPaid(Double paid){ this.paid= paid; };
 
     public boolean isSelected() {
         return selected;

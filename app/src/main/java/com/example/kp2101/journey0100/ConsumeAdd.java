@@ -60,12 +60,12 @@ public class ConsumeAdd extends AppCompatActivity  implements
         lvMember = (ListView) findViewById(R.id.lvMember);
         getConsumeMemberList();
 
-        //點ListView觸發檢視行程
-        lvMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
+//        //點ListView觸發檢視行程
+//        lvMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//            }
+//        });
 
         //更改總金額觸發
         edtCDollar.addTextChangedListener(new TextWatcher() {
@@ -90,6 +90,7 @@ public class ConsumeAdd extends AppCompatActivity  implements
                 cName = edtCName.getText().toString();
                 cDollar = Double.parseDouble(edtCDollar.getText().toString());
 
+                refreshList();
                 String cId=ConsumeDB.addConsume(globalVariable.jId, cName, cDollar);
                 ConsumeDB.addUserConsume(cId,consumemembers);
                 Toast.makeText(ConsumeAdd.this,"新增成功",Toast.LENGTH_LONG).show();
@@ -100,6 +101,8 @@ public class ConsumeAdd extends AppCompatActivity  implements
 
 
     }
+
+    //撈下半部member list
     public void getConsumeMemberList(){
 
         consumemembers = MemberDB.consumeMemberAddList(globalVariable.jId);
@@ -157,8 +160,10 @@ public class ConsumeAdd extends AppCompatActivity  implements
 
 
     }
+
+    //更新list
     public void refreshList(){
-        //更新list
+
         List<ConsumeMember> cmNew = new ArrayList<ConsumeMember>();
         cmNew.addAll(consumemembers);
         consumememberAdapter.updateReceiptsList(cmNew);
