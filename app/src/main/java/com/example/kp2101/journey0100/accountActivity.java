@@ -6,16 +6,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.List;
 
 
-public class JourneyActivity extends AppCompatActivity {
+public class accountActivity extends AppCompatActivity {
 
     //撈JourneyList
     private ListView lvJourney;
@@ -47,7 +47,7 @@ public class JourneyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 Intent callsub = new Intent();
-                callsub.setClass(JourneyActivity.this,JourneyAdd.class);
+                callsub.setClass(accountActivity.this,JourneyAdd.class);
                 startActivity(callsub);
 
             }
@@ -60,7 +60,7 @@ public class JourneyActivity extends AppCompatActivity {
                 String jId = j.getjId();
                 String jName = j.getjName();
                 Log.d("JA getItem Jid",jId);
-                Intent myIntent = new Intent(JourneyActivity.this,JSubActivity.class);
+                Intent myIntent = new Intent(accountActivity.this,JSubActivity.class);
                 myIntent.putExtra("jId", jId);
                 myIntent.putExtra("jName", jName);
                 startActivity(myIntent);
