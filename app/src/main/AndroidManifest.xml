@@ -30,6 +30,8 @@
         <activity android:name=".MemberAdd"></activity>
         <activity android:name=".ConsumeAdd"></activity>
 
+        <activity android:name=".transActivity"></activity>
+
 
 
 

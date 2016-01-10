@@ -38,8 +38,33 @@ public class MemberDB {
         dbManager.DBexecuteUpdate(sql);
     }
 
-    public static List<Member> memberList(String jId){
-        String sql="SELECT * FROM `userjourney`  NATURAL JOIN user where jId="+jId+"";
+
+    public static Member memberMe(String jId,String uId){
+        String sql="SELECT * FROM `userjourney`  NATURAL JOIN `user` where jId="+jId+" AND uId="+uId+"";
+        Log.d("memberMe sql", sql);
+        ResultSet resultSet = dbManager.DBexecute(sql);
+        Member member = null;
+        try {
+            resultSet.next();
+            member = new Member(resultSet.getString("uId"), resultSet.getString("uName"), resultSet.getString("ujMoney"));
+
+            //dbManager.statement.close();
+            //resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return member;
+
+    }
+
+    public static List<Member> memberList(String jId,String uId){
+        String sql="SELECT * FROM `userjourney`  NATURAL JOIN user where jId="+jId+" AND uId <> "+uId+"";
         Log.d("memberList sql", sql);
         ResultSet resultSet = dbManager.DBexecute(sql);
 
@@ -76,7 +101,7 @@ public class MemberDB {
                 consumeMemberList.add(consumemember);
             }
             //dbManager.statement.close();
-            //resultSet.close();
+            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
