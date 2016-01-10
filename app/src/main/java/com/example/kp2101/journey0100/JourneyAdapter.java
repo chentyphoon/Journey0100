@@ -97,10 +97,12 @@ public class JourneyAdapter extends BaseAdapter {
         ImageView ivjPic;
         TextView txtjId;
         TextView txtjName;
-        public viewHolder(ImageView ivjPic, TextView txtjId,TextView txtjName){
+        TextView txtMoney;
+        public viewHolder(ImageView ivjPic, TextView txtjId,TextView txtjName, TextView txtMoney){
             this.ivjPic = ivjPic;
             this.txtjId = txtjId;
             this.txtjName = txtjName;
+            this.txtMoney = txtMoney;
         }
     }
 
@@ -114,7 +116,8 @@ public class JourneyAdapter extends BaseAdapter {
             //Log.d("convertView=", "null");
             // 建立項目畫面元件
             view = inflater.inflate(R.layout.journey_item, null);
-            holder = new viewHolder((ImageView)view.findViewById(R.id.ivjPic), (TextView)view.findViewById(R.id.txtjId), (TextView)view.findViewById(R.id.txtjName));
+            holder = new viewHolder((ImageView)view.findViewById(R.id.ivjPic), (TextView)view.findViewById(R.id.txtjId),
+                    (TextView)view.findViewById(R.id.txtjName), (TextView) view.findViewById(R.id.txtMoney));
             view.setTag(holder);
         }else {
             holder = (viewHolder) convertView.getTag();
@@ -124,6 +127,7 @@ public class JourneyAdapter extends BaseAdapter {
         Journey journey = (Journey) getItem(position);
         holder.txtjId.setText(journey.getjId());
         holder.txtjName.setText(journey.getjName());
+        holder.txtMoney.setText(journey.getUjMoney()+"    NT $");
         //method2
         ImageLoader.getInstance().displayImage(journey.getjPic(), holder.ivjPic, options, animateFirstListener);
         //method1
@@ -132,21 +136,21 @@ public class JourneyAdapter extends BaseAdapter {
     }
 
     //method2
-    private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
-
-        static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
-
-        @Override
-        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-            if (loadedImage != null) {
-                ImageView imageView = (ImageView) view;
-                boolean firstDisplay = !displayedImages.contains(imageUri);
-                if (firstDisplay) {
-                    FadeInBitmapDisplayer.animate(imageView, 500);
-                    displayedImages.add(imageUri);
-                }
-            }
-        }
-    }
+//    private static class AnimateFirstDisplayListener extends SimpleImageLoadingListener {
+//
+//        static final List<String> displayedImages = Collections.synchronizedList(new LinkedList<String>());
+//
+//        @Override
+//        public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//            if (loadedImage != null) {
+//                ImageView imageView = (ImageView) view;
+//                boolean firstDisplay = !displayedImages.contains(imageUri);
+//                if (firstDisplay) {
+//                    FadeInBitmapDisplayer.animate(imageView, 500);
+//                    displayedImages.add(imageUri);
+//                }
+//            }
+//        }
+//    }
 }
 

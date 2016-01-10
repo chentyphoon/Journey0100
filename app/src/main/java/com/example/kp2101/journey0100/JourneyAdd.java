@@ -106,7 +106,15 @@ public class JourneyAdd  extends AppCompatActivity {
             Log.d("data", data.getDataString());
             imageUri = data.getData();
             ivAddPic.setImageURI(imageUri);
-            startActivityForResult(ImageSelector.doCrop(imageUri), ImageSelector.CROP_OK);
+            //startActivityForResult(ImageSelector.doCrop(imageUri), ImageSelector.CROP_OK);
+            //test
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                imageUri = ImageSelector.bitmapToFile(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //test end
             //reduceImage();
 
             //ivPhoto.setImageURI(imageUri);

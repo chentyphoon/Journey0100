@@ -7,10 +7,12 @@ public class Journey {
     String jId;
     String jName;
     String jPic;
-    public Journey(String jId, String jName, String jPic){
+    String ujMoney;
+    public Journey(String jId, String jName, String jPic, String ujMoney){
         this.jId = jId;
         this.jName = jName;
         this.jPic = jPic;
+        this.ujMoney = ujMoney;
     }
 
     public String getjId(){
@@ -23,6 +25,10 @@ public class Journey {
 
     public String getjPic(){
         return jPic;
+    }
+
+    public String getUjMoney(){
+        return ujMoney;
     }
 
     public void setjName(String jName){

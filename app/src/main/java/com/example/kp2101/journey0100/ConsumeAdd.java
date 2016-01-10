@@ -88,8 +88,11 @@ public class ConsumeAdd extends AppCompatActivity  implements
             @Override
             public void onClick(View v) {
                 cName = edtCName.getText().toString();
-                cDollar = Double.parseDouble(edtCDollar.getText().toString());
-
+                if(edtCDollar.getText().equals("")){
+                    cDollar=0.0;
+                }else {
+                    cDollar = Double.parseDouble(edtCDollar.getText().toString());
+                }
                 refreshList();
                 String cId=ConsumeDB.addConsume(globalVariable.jId, cName, cDollar);
                 ConsumeDB.addUserConsume(globalVariable.jId,cId,consumemembers);
@@ -118,6 +121,7 @@ public class ConsumeAdd extends AppCompatActivity  implements
     @Override
     public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
         int pos = lvMember.getPositionForView(buttonView);
+
         if(pos != ListView.INVALID_POSITION){
             ConsumeMember consumemember = consumemembers.get(pos);
             consumemember.setSelected(isChecked);
@@ -136,14 +140,21 @@ public class ConsumeAdd extends AppCompatActivity  implements
 
 
 
+
+
     //重新分配每個member的應付金額
     public void setNeed(){
         //Log.d("checkmember", checkmember.toString());
         //Log.d("cDollar", edtCDollar.getText().toString());
         //Log.d("checkmember size", Integer.toString(checkmember.size()));
 
+
         //計算平均分攤
-        cDollar=Double.parseDouble(edtCDollar.getText().toString());
+        if(edtCDollar.getText().equals("")){
+            cDollar=0.0;
+        }else {
+            cDollar = Double.parseDouble(edtCDollar.getText().toString());
+        }
         double mean=cDollar/(double)checkmember.size();
         //Log.d("mean", String.valueOf(mean));
 

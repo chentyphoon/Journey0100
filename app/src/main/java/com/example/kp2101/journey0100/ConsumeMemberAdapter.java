@@ -91,7 +91,14 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
             holder = new viewHolder((ImageView)convertView.findViewById(R.id.ivuPic), (TextView)convertView.findViewById(R.id.txtuId),
                     (TextView)convertView.findViewById(R.id.txtuName), (CheckBox)convertView.findViewById(R.id.cbNeed),
                     (EditText)convertView.findViewById(R.id.edtNeed),(EditText)convertView.findViewById(R.id.edtPaid));
-            holder.cbNeed.setOnCheckedChangeListener((ConsumeAdd) context);
+            /**
+                        *    Ensure no other setOnCheckedChangeListener is attached before you manually
+                        *    change its state.
+                        */
+//            holder.cbNeed.setOnCheckedChangeListener(null);
+//            holder.cbNeed.setChecked(false);
+//
+//            holder.cbNeed.setOnCheckedChangeListener((ConsumeAdd) context);
 
 
             convertView.setTag(holder);
@@ -106,7 +113,9 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
         holder.txtuName.setText(consumemember.getuName());
         holder.edtNeed.setText(String.valueOf(consumemember.getNeed()));
         holder.edtPaid.setText(String.valueOf(consumemember.getPaid()));
+        holder.cbNeed.setOnCheckedChangeListener(null);
         holder.cbNeed.setChecked(consumemember.isSelected());
+        holder.cbNeed.setOnCheckedChangeListener((ConsumeAdd) context);
         holder.cbNeed.setTag(consumemember);
 
 

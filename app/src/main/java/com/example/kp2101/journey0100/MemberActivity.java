@@ -48,7 +48,7 @@ public class MemberActivity extends Fragment {
         txtjMeMoney = (TextView) view.findViewById(R.id.txtjMeMoney);
         jMe=MemberDB.memberMe(globalVariable.jId,globalVariable.uId);
         txtjMeName.setText(jMe.getuName());
-        txtjMeMoney.setText(jMe.getujMoney());
+        txtjMeMoney.setText(jMe.getujMoney()+"   NT $");
 
 
         //撈MemberList

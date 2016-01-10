@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:padding="@dimen/activity_vertical_margin">
 
     //android:visibility="invisible"
 
@@ -11,7 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cbNeed"
-        android:checked="false" />
+        android:checked="false"
+        android:gravity="center_vertical" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -22,43 +24,59 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/txtuId"/>
+        android:id="@+id/txtuId"
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/txtuName" />
+        android:id="@+id/txtuName"
+        android:layout_weight="0.4"
+        android:textColor="@color/colorlvTitle"
+        android:gravity="center_vertical" />
 
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="應付"
-        android:id="@+id/textView2" />
+        android:layout_height="match_parent"
+        android:layout_weight="0.6">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:id="@+id/edtNeed"
-        android:layout_weight="0.3" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/txt_need"
+            android:id="@+id/textView2"
+            android:layout_weight="0.1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="已付"
-        android:id="@+id/textView3" />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:id="@+id/edtNeed"
+            android:layout_weight="0.4"
+            android:textColor="@color/colorMoney"
+            android:padding="@dimen/lv_margin" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:id="@+id/edtPaid"
-        android:layout_weight="0.3" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/txt_paid"
+            android:id="@+id/textView3"
+            android:layout_weight="0.1" />
 
-
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:id="@+id/edtPaid"
+            android:layout_weight="0.4"
+            android:textColor="@color/colorPaid"
+            android:gravity="bottom"
+            android:padding="@dimen/lv_margin" />
+    </LinearLayout>
 
 
 </LinearLayout>

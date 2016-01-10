@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#3F51B5</color>
+    <color name="colorPrimary">#008800</color>
+    <color name="colorPrimaryDark">#006f00</color>
+    <color name="colorAccent">#66CDAA</color>
+    <color name="colorTab">#b2ef00</color>
+    <color name="colorlvTitle">#f14b3232</color>
+    <color name="colorMoney">#880000</color>
+    <color name="colorlvBack">#f0f0f0</color>
+    <color name="colorPaid">	#007799</color>
+    <color name="colorUjMe">#F5F5DC</color>
 </resources>

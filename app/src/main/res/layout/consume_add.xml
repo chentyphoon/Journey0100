@@ -27,13 +27,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="名稱"
+            android:text="@string/txt_name"
             android:id="@+id/textView" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/edtCName" />
+            android:id="@+id/edtCName"
+            android:textColor="@color/colorlvTitle" />
 
     </LinearLayout>
         <LinearLayout
@@ -45,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="金額"
+                android:text="@string/txt_money"
                 android:id="@+id/textView" />
 
             <EditText
@@ -53,13 +54,16 @@
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:id="@+id/edtCDollar"
-                android:text="0" />
+                android:textColor="@color/colorlvTitle"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:hint="0" />
 
         </LinearLayout>
         <ListView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lvMember" />
+            android:id="@+id/lvMember"
+            android:background="@color/colorlvBack"/>
 
 
 

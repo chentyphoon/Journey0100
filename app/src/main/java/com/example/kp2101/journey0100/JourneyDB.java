@@ -46,7 +46,7 @@ public class JourneyDB {
         List<Journey> journeyList = new ArrayList<Journey>();
         try {
             while (resultSet.next()){
-                Journey journey = new Journey(resultSet.getString("jId"), resultSet.getString("jName"), resultSet.getString("jPic"));
+                Journey journey = new Journey(resultSet.getString("jId"), resultSet.getString("jName"), resultSet.getString("jPic"), resultSet.getString("ujMoney"));
                 journeyList.add(journey);
             }
             //dbManager.statement.close();
