@@ -32,15 +32,16 @@ public class GlobalVariable extends Application {
     public static File cacheDir;
 
 
-    public GlobalVariable() {
+    public void initCacheDir() {
 
-        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
-            cacheDir=new File(android.os.Environment.getExternalStorageDirectory(),"Journey");
-        else
-            cacheDir=getCacheDir();
-        if(!cacheDir.exists())
-            cacheDir.mkdirs();
-
+        FileCache fileCache = new FileCache(this);
+//        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
+//            cacheDir=new File(android.os.Environment.getExternalStorageDirectory(),"Journey");
+//        else
+//            cacheDir=getCacheDir();
+//        if(!cacheDir.exists())
+//            cacheDir.mkdirs();
+        cacheDir = fileCache.getCacheDir();
 
     }
 

@@ -47,9 +47,10 @@ public class JourneyActivity extends AppCompatActivity {
         globalVariable = (GlobalVariable) getApplicationContext();
         //globalVariable.init();
         //globalVariable.init();
-        globalVariable.uId = "4"; //chentyphoon@yahoo.com.tw
+        globalVariable.uId = "5"; //chentyphoon@yahoo.com.tw
 
         globalVariable.initImageLoader();
+        globalVariable.initCacheDir();
         //Set Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

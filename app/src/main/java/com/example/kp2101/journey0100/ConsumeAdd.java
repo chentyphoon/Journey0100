@@ -120,21 +120,24 @@ public class ConsumeAdd extends AppCompatActivity  implements
     //抓有哪幾個member要攤錢
     @Override
     public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
+        Log.d("onCheckedChanged", "onCheckedChanged");
         int pos = lvMember.getPositionForView(buttonView);
 
         if(pos != ListView.INVALID_POSITION){
             ConsumeMember consumemember = consumemembers.get(pos);
+            Log.d("consumemember", consumemember.toString());
             consumemember.setSelected(isChecked);
             //Toast.makeText(this,"Selected:"+consumemember.getuId()+";status:"+isChecked,Toast.LENGTH_SHORT).show();
 
             //將checked的人存到map中
             if(isChecked){
-                checkmember.put(Integer.valueOf(pos),consumemember.getuId());
+                checkmember.put(Integer.valueOf(pos), consumemember.getuId());
             }else{
                 checkmember.remove(Integer.valueOf(pos));
+
             }
             setNeed();
-        }
+       }
     }
 
 
@@ -156,7 +159,7 @@ public class ConsumeAdd extends AppCompatActivity  implements
             cDollar = Double.parseDouble(edtCDollar.getText().toString());
         }
         double mean=cDollar/(double)checkmember.size();
-        //Log.d("mean", String.valueOf(mean));
+
 
         //重設每個pos的應付金額
         for(int pos=0;pos<consumemembers.size();pos++) {
@@ -166,6 +169,7 @@ public class ConsumeAdd extends AppCompatActivity  implements
             }else{
                 consumemembers.get(pos).setNeed(0.0);
             }
+
         }
         refreshList();
 

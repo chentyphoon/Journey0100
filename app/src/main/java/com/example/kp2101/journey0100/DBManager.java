@@ -45,7 +45,7 @@ public class DBManager {
             e.printStackTrace();
         }
 
-        Log.d("resultset in DBexecute", resultSet.toString());
+        //Log.d("resultset in DBexecute", resultSet.toString());
 
         return resultSet;
     }
