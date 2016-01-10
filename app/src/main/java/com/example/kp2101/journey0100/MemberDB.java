@@ -23,7 +23,7 @@ public class MemberDB {
     }
 
     public static void addMemberToJourney(String uId,String jId){
-        String sql = "INSERT INTO userjourney (uId,jId) VALUES (\""+uId+"\",\""+jId+"\");";
+        String sql = "INSERT INTO `userjourney` (uId,jId) VALUES ("+uId+","+jId+");";
         Log.d("addMemberToJourney",sql);
         dbManager.DBexecuteUpdate(sql);
 
@@ -34,19 +34,19 @@ public class MemberDB {
     }
 
     public static void deleteJourney(String jId){
-        String sql = "DELETE FROM journey WHERE jId=\""+jId+"\"";
+        String sql = "DELETE FROM `journey` WHERE jId="+jId+"";
         dbManager.DBexecuteUpdate(sql);
     }
 
     public static List<Member> memberList(String jId){
-        String sql="SELECT * FROM userjourney  NATURAL JOIN user where jId=\""+jId+"\"";
-        Log.d("memberList sql",sql);
+        String sql="SELECT * FROM `userjourney`  NATURAL JOIN user where jId="+jId+"";
+        Log.d("memberList sql", sql);
         ResultSet resultSet = dbManager.DBexecute(sql);
 
         List<Member> memberList = new ArrayList<Member>();
         try {
             while (resultSet.next()){
-                Member member = new Member(resultSet.getString("uId"), resultSet.getString("uName"));
+                Member member = new Member(resultSet.getString("uId"), resultSet.getString("uName"), resultSet.getString("ujMoney"));
                 memberList.add(member);
             }
             //dbManager.statement.close();
@@ -61,6 +61,32 @@ public class MemberDB {
         }
 
         return memberList;
+
+    }
+
+    public static List<ConsumeMember> consumeMemberAddList(String jId){
+        String sql="SELECT * FROM userjourney  NATURAL JOIN user where jId=\""+jId+"\"";
+        Log.d("memberList sql",sql);
+        ResultSet resultSet = dbManager.DBexecute(sql);
+
+        List<ConsumeMember> consumeMemberList = new ArrayList<ConsumeMember>();
+        try {
+            while (resultSet.next()){
+                ConsumeMember consumemember = new ConsumeMember(resultSet.getString("uId"), resultSet.getString("uName"));
+                consumeMemberList.add(consumemember);
+            }
+            //dbManager.statement.close();
+            //resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return consumeMemberList;
 
     }
 }

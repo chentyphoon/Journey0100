@@ -30,17 +30,35 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/txtuName" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/edtNeed"
-        android:layout_weight="0.3" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="應付"
+        android:id="@+id/textView2" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:id="@+id/edtNeed"
+        android:layout_weight="0.3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="已付"
+        android:id="@+id/textView3" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
         android:id="@+id/edtPaid"
         android:layout_weight="0.3" />
+
+
 
 
 </LinearLayout>

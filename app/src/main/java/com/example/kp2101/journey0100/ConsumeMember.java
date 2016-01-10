@@ -3,18 +3,18 @@ package com.example.kp2101.journey0100;
 /**
  * Created by Yu on 2016/1/6.
  */
-public class Member {
+public class ConsumeMember {
     String uId;
     String uName;
-    String ujMoney;
     boolean selected=false;
+    Double need=0.0;
+    Double paid=0.0;
 
 
-    public Member(String uId, String uName,String ujMoney){
+
+    public ConsumeMember(String uId, String uName){
         this.uId = uId;
         this.uName = uName;
-        this.ujMoney = ujMoney;
-
     }
 
     public String getuId() {
@@ -33,13 +33,16 @@ public class Member {
         this.uName = uName;
     }
 
-    public String getujMoney() {
-        return ujMoney;
+    public Double getNeed() {
+        return need;
     }
 
-    public void setujMoney(String ujMoney) {
-        this.ujMoney = ujMoney;
+    public void setNeed(Double need){ this.need= need; };
+
+    public Double getPaid() {
+        return paid;
     }
+    public void setPaid(Double paid){ this.paid= paid; };
 
     public boolean isSelected() {
         return selected;

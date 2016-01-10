@@ -51,7 +51,9 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtCDollar" />
+                android:inputType="numberDecimal"
+                android:id="@+id/edtCDollar"
+                android:text="0" />
 
         </LinearLayout>
         <ListView
