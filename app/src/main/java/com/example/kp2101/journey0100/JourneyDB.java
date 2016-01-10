@@ -22,13 +22,14 @@ public class JourneyDB {
     public JourneyDB(){
     }
 
-    public static void addJourney(String jName,String uId){
+    public static String addJourney(String jName,String uId){
         String sql = "INSERT INTO journey (jName) VALUES (\""+jName+"\");";
         String id = dbManager.DBexecuteUpdate(sql);
         Log.d("addJourney jId",id);
         String sql2 = "INSERT INTO userjourney (jId,uId) VALUES ("+id+","+uId+");";
         Log.d("addJourney sql2",sql2);
         dbManager.DBexecuteUpdate(sql2);
+        return id;
 
     }
 
@@ -45,7 +46,7 @@ public class JourneyDB {
         List<Journey> journeyList = new ArrayList<Journey>();
         try {
             while (resultSet.next()){
-                Journey journey = new Journey(resultSet.getString("jId"), resultSet.getString("jName"));
+                Journey journey = new Journey(resultSet.getString("jId"), resultSet.getString("jName"), resultSet.getString("jPic"));
                 journeyList.add(journey);
             }
             //dbManager.statement.close();

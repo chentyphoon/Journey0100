@@ -1,5 +1,6 @@
 package com.example.kp2101.journey0100;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,18 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.nostra13.universalimageloader.utils.StorageUtils;
+
+import java.io.File;
 import java.util.List;
 
 
@@ -28,15 +41,43 @@ public class JourneyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.journey_main);
 
+
+
         //抓全域變數uId
         globalVariable = (GlobalVariable) getApplicationContext();
+        //globalVariable.init();
+        //globalVariable.init();
         globalVariable.uId = "4"; //chentyphoon@yahoo.com.tw
 
+        globalVariable.initImageLoader();
         //Set Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("旅程列表");
 
+//        File cacheDir = StorageUtils.getCacheDirectory(this);
+//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+//                .memoryCacheExtraOptions(90, 90) // default = device screen dimensions
+//                .diskCacheExtraOptions(480, 800, null)
+//                .threadPoolSize(3) // default
+//                .threadPriority(Thread.NORM_PRIORITY - 2) // default
+//                .tasksProcessingOrder(QueueProcessingType.FIFO) // default
+//                .denyCacheImageMultipleSizesInMemory()
+//                .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+//                .memoryCacheSize(2 * 1024 * 1024)
+//                .memoryCacheSizePercentage(13) // default
+//                .diskCache(new UnlimitedDiskCache(cacheDir)) // default
+//                .diskCacheSize(50 * 1024 * 1024)
+//                .diskCacheFileCount(100)
+//                .diskCacheFileNameGenerator(new HashCodeFileNameGenerator()) // default
+//                .imageDownloader(new BaseImageDownloader(this)) // default
+//                .imageDecoder(new BaseImageDecoder(false))
+//                .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
+//                .writeDebugLogs()
+//                .build();
+//        Log.d("builder", "ok");
+//        ImageLoader.getInstance().init(config);
+//        Log.d("config", "ok");
         //撈JourneyList
         getJourneyList();
 
@@ -82,6 +123,32 @@ public class JourneyActivity extends AppCompatActivity {
 
     }
 
+//    private void initializeImageLoader() {
+//
+//        //ImageLoader.getInstance().init(globalVariable.config);
+//        File cacheDir = StorageUtils.getCacheDirectory(this.getApplicationContext());
+//        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this.getApplicationContext())
+//                .memoryCacheExtraOptions(90, 90) // default = device screen dimensions
+//                .diskCacheExtraOptions(480, 800, null)
+//                .threadPoolSize(3) // default
+//                .threadPriority(Thread.NORM_PRIORITY - 2) // default
+//                .tasksProcessingOrder(QueueProcessingType.FIFO) // default
+//                .denyCacheImageMultipleSizesInMemory()
+//                .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+//                .memoryCacheSize(2 * 1024 * 1024)
+//                .memoryCacheSizePercentage(13) // default
+//                .diskCache(new UnlimitedDiskCache(cacheDir)) // default
+//                .diskCacheSize(50 * 1024 * 1024)
+//                .diskCacheFileCount(100)
+//                .diskCacheFileNameGenerator(new HashCodeFileNameGenerator()) // default
+//                .imageDownloader(new BaseImageDownloader(this.getApplicationContext())) // default
+//                .imageDecoder(new BaseImageDecoder(false))
+//                .defaultDisplayImageOptions(DisplayImageOptions.createSimple()) // default
+//                .writeDebugLogs()
+//                .build();
+//        ImageLoader.getInstance().init(config);
+//    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -117,7 +184,7 @@ public class JourneyActivity extends AppCompatActivity {
         super.onResume();
     }
     public void getJourneyList(){
-
+        //initializeImageLoader();
         lvJourney = (ListView) findViewById(R.id.lvJourney);
         journeys = JourneyDB.journeyList(globalVariable.uId);
         journeyAdapter = new JourneyAdapter(this, journeys);
@@ -127,6 +194,14 @@ public class JourneyActivity extends AppCompatActivity {
 
         lvJourney.setAdapter(journeyAdapter);
         //Log.d("adaper", "after");
-
+        //journeyAdapter.registerDataSetObserver();
     }
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        if(journeyAdapter!=null){
+//            journeyAdapter.destroy();
+//        }
+//    }
 }

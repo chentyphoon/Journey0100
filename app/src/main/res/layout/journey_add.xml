@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/tool_bar" />
+
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:id="@+id/ivAddPic"
+        android:src="@android:drawable/ic_menu_gallery" />
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
@@ -17,8 +24,7 @@
         >
 
 
-
-    <LinearLayout
+        <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -47,5 +53,6 @@
                 android:text="確定"
                 android:id="@+id/btnAddJ" />
         </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

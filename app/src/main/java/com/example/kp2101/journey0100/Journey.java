@@ -6,9 +6,11 @@ package com.example.kp2101.journey0100;
 public class Journey {
     String jId;
     String jName;
-    public Journey(String jId, String jName){
+    String jPic;
+    public Journey(String jId, String jName, String jPic){
         this.jId = jId;
         this.jName = jName;
+        this.jPic = jPic;
     }
 
     public String getjId(){
@@ -19,7 +21,15 @@ public class Journey {
         return jName;
     }
 
+    public String getjPic(){
+        return jPic;
+    }
+
     public void setjName(String jName){
         this.jName = jName;
+    }
+
+    public void setjPic(String jPic){
+        this.jPic = jPic;
     }
 }
