@@ -20,6 +20,11 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             >
 
+            <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -27,6 +32,13 @@
                 android:ems="10"
                 android:id="@+id/note"
                 android:hint="金額" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:id="@+id/btnEdit" />
+
+        </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -36,14 +48,16 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PAy"
+                    android:text="Pay"
                     android:id="@+id/btnPay" />
+
+
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edit"
-                    android:id="@+id/btnEdit" />
+                    android:text="Receive"
+                    android:id="@+id/btnReceive" />
 
             </LinearLayout>
 
