@@ -45,10 +45,12 @@ public class MemberAdapter extends BaseAdapter {
         ImageView ivuPic;
         TextView txtuId;
         TextView txtuName;
-        public viewHolder(ImageView ivuPic, TextView txtuId,TextView txtuName){
+        TextView txtujMoney;
+        public viewHolder(ImageView ivuPic, TextView txtuId,TextView txtuName,TextView txtujMoney){
             this.ivuPic = ivuPic;
             this.txtuId = txtuId;
             this.txtuName = txtuName;
+            this.txtujMoney = txtujMoney;
         }
     }
 
@@ -61,7 +63,7 @@ public class MemberAdapter extends BaseAdapter {
             //Log.d("convertView=", "null");
             // 建立項目畫面元件
             convertView = inflater.inflate(R.layout.member_item, null);
-            holder = new viewHolder((ImageView)convertView.findViewById(R.id.ivuPic), (TextView)convertView.findViewById(R.id.txtuId), (TextView)convertView.findViewById(R.id.txtuName));
+            holder = new viewHolder((ImageView)convertView.findViewById(R.id.ivuPic), (TextView)convertView.findViewById(R.id.txtuId), (TextView)convertView.findViewById(R.id.txtuName), (TextView)convertView.findViewById(R.id.txtujMoney));
             convertView.setTag(holder);
         }else {
             holder = (viewHolder) convertView.getTag();
@@ -71,6 +73,7 @@ public class MemberAdapter extends BaseAdapter {
         Member member = (Member) getItem(position);
         holder.txtuId.setText(member.getuId());
         holder.txtuName.setText(member.getuName());
+        holder.txtujMoney.setText(member.getujMoney());
 
         return convertView;
     }

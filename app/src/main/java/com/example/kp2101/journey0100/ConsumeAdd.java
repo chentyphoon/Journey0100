@@ -92,7 +92,7 @@ public class ConsumeAdd extends AppCompatActivity  implements
 
                 refreshList();
                 String cId=ConsumeDB.addConsume(globalVariable.jId, cName, cDollar);
-                ConsumeDB.addUserConsume(cId,consumemembers);
+                ConsumeDB.addUserConsume(globalVariable.jId,cId,consumemembers);
                 Toast.makeText(ConsumeAdd.this,"新增成功",Toast.LENGTH_LONG).show();
                 finish();
             }
