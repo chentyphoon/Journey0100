@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 
@@ -20,7 +21,7 @@ import com.facebook.login.LoginManager;
  */
 public class JSubActivity extends AppCompatActivity {
     String jName;
-
+    GlobalVariable globalVariable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class JSubActivity extends AppCompatActivity {
         setContentView(R.layout.jsub_main);
 
         //抓全域變數
-        GlobalVariable globalVariable = (GlobalVariable)getApplicationContext();
+        globalVariable = (GlobalVariable)getApplicationContext();
 
         //抓上一個activity傳來的jId
         globalVariable.jId = getIntent().getExtras().getString("jId");
@@ -108,4 +109,5 @@ public class JSubActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    
 }
