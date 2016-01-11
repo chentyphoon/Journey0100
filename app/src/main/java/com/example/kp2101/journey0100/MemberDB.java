@@ -22,8 +22,39 @@ public class MemberDB {
     public MemberDB(){
     }
 
+
+    public static String meCheck(String fbId,String fbname){
+        String sql="SELECT * FROM `user`  where uFbid='"+fbId+"' AND uName='"+fbname+"'";
+        Log.d("meCheck sql", sql);
+        ResultSet resultSet = dbManager.DBexecute(sql);
+        String uId = "";
+        try {
+            resultSet.next();
+            uId = resultSet.getString("uId");
+            //dbManager.statement.close();
+            //resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(uId==""){
+            String sql2 = "INSERT INTO `user` (uName,uFbId) VALUES ('"+fbname+"','"+fbId+"');";
+            Log.d("meCheck sql2", sql2);
+            uId = dbManager.DBexecuteUpdate(sql2);
+        }
+
+
+        Log.d("meCheck uId", uId);
+        return uId;
+    }
+
     public static void addMemberToJourney(String uId,String jId){
-        String sql = "INSERT INTO `userjourney` (uId,jId) VALUES ("+uId+","+jId+");";
+        String sql = "INSERT INTO `userjourney` (uId,jId) VALUES ('"+uId+"','"+jId+"');";
         //Log.d("addMemberToJourney",sql);
         dbManager.DBexecuteUpdate(sql);
 

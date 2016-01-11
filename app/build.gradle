@@ -18,6 +18,9 @@ android {
         }
     }
 }
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -27,4 +30,5 @@ dependencies {
     compile files('libs/mysql-connector-java-3.0.17-ga-bin.jar')
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.squareup.okhttp:okhttp:2.7.2'
+    compile 'com.facebook.android:facebook-android-sdk:4.7.0'
 }

@@ -13,6 +13,9 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.facebook.AccessToken;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
@@ -35,6 +38,10 @@ public class JourneyActivity extends AppCompatActivity {
     private List<Journey> journeys=null;
     private JourneyAdapter journeyAdapter=null;
     GlobalVariable globalVariable;
+    Profile profile;
+    String fbid="";
+    String fbname="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +50,18 @@ public class JourneyActivity extends AppCompatActivity {
 
 
 
+        fbid = getIntent().getExtras().getString("fbid");
+        fbname = getIntent().getExtras().getString("fbname");
+        String uId=MemberDB.meCheck(fbid,fbname);
+
+
+
+
         //抓全域變數uId
         globalVariable = (GlobalVariable) getApplicationContext();
         //globalVariable.init();
         //globalVariable.init();
-        globalVariable.uId = "5"; //chentyphoon@yahoo.com.tw
+        globalVariable.uId = uId;
 
         globalVariable.initImageLoader();
         globalVariable.initCacheDir();
@@ -150,6 +164,8 @@ public class JourneyActivity extends AppCompatActivity {
 //        ImageLoader.getInstance().init(config);
 //    }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -172,6 +188,17 @@ public class JourneyActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, accountActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.action_logout:
+                LoginManager.getInstance().logOut();
+                if(AccessToken.getCurrentAccessToken()==null){
+                    Log.d("Access inLO","null");
+                }else{
+                    Log.d("Access inLO",AccessToken.getCurrentAccessToken().toString());
+                }
+                Intent intent2 = new Intent(this, MainActivity.class);
+                startActivity(intent2);
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -189,6 +216,11 @@ public class JourneyActivity extends AppCompatActivity {
         //Log.d("JA status","resume");
         super.onResume();
     }
+
+
+
+
+
     public void getJourneyList(){
         //initializeImageLoader();
         lvJourney = (ListView) findViewById(R.id.lvJourney);
