@@ -60,7 +60,8 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    >
 
 
 
@@ -104,7 +105,8 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.1">
+                android:layout_weight="0.1"
+                android:layout_below="@+id/btnAddC">
 
                 <ListView
                     android:layout_width="match_parent"
@@ -122,13 +124,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="bottom">
+                >
 
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="確定"
-                    android:id="@+id/btnAddC" />
+                    android:id="@+id/btnAddC"
+                    android:gravity="bottom|end"/>
             </LinearLayout>
 
         </LinearLayout>

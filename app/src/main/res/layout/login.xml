@@ -25,19 +25,31 @@
         android:layout_height="fill_parent"
         android:layout_weight="1">
 
-        <TextView
-            android:layout_width="192dp"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Login"
-            android:id="@+id/textView4"
-            android:textStyle="bold"
-            android:textSize="35dp"
-            android:textColor="#ffffff"
-            android:layout_gravity="center"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/lv_margin"
-            android:background="@color/colorPrimaryDark" />
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2"
+                android:src="@drawable/ic_facebook" />
+
+            <TextView
+                android:layout_width="192dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Login"
+                android:id="@+id/textView4"
+                android:textStyle="bold"
+                android:textSize="35dp"
+                android:textColor="#ffffff"
+                android:padding="@dimen/lv_margin"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
