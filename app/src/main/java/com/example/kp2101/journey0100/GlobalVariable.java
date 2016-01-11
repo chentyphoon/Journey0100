@@ -28,6 +28,7 @@ import java.io.File;
 public class GlobalVariable extends Application {
     public String uId = "";
     public String jId = "";
+    public String uName = "";
     public String jName = "";
     public static File cacheDir;
 

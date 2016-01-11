@@ -8,6 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import java.util.List;
 
 /**
@@ -17,6 +20,8 @@ public class MemberAdapter extends BaseAdapter {
 
     private List<Member> members;
     private LayoutInflater inflater;
+    private DisplayImageOptions options;
+    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
     //private int resource;
 
@@ -24,6 +29,16 @@ public class MemberAdapter extends BaseAdapter {
 
         inflater = LayoutInflater.from(context);
         this.members = members;
+
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.loading)
+                .showImageForEmptyUri(android.R.drawable.ic_menu_gallery)
+                .showImageOnFail(android.R.drawable.ic_menu_close_clear_cancel)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                        //.displayer(new CircleBitmapDisplayer(Color.WHITE, 5))
+                .build();
     }
 
     @Override
@@ -74,6 +89,7 @@ public class MemberAdapter extends BaseAdapter {
         holder.txtuId.setText(member.getuId());
         holder.txtuName.setText(member.getuName());
         holder.txtujMoney.setText(member.getujMoney());
+        ImageLoader.getInstance().displayImage("http://graph.facebook.com/"+member.getuFbid()+"/picture?width=90&height=90", holder.ivuPic, options, animateFirstListener);
 
         return convertView;
     }

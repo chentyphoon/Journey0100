@@ -56,6 +56,6 @@ public class ShowMap extends Fragment implements GoogleApiClient.ConnectionCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        map.addMarker(new MarkerOptions().position(new LatLng(lat, lon)).)
+        //map.addMarker(new MarkerOptions().position(new LatLng(lat, lon)).)
     }
 }

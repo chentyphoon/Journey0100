@@ -18,7 +18,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2">
+            android:padding="@dimen/lv_margin">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -29,7 +29,8 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/flMAp"></FrameLayout>
+                    android:id="@+id/flMAp"
+                    android:padding="@dimen/lv_margin"></FrameLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -44,18 +45,15 @@
                 android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/txt_name"
-                    android:id="@+id/textView" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/edtCName"
-                    android:textColor="@color/colorlvTitle" />
+                    android:textColor="@color/colorlvTitle"
+                    android:hint="@string/txt_name"
+                    android:textSize="25dp"
+                    android:padding="@dimen/lv_margin" />
 
             </LinearLayout>
 
@@ -65,12 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/txt_money"
-                        android:id="@+id/textView" />
+
 
                     <EditText
                         android:layout_width="match_parent"
@@ -78,40 +71,69 @@
                         android:inputType="numberDecimal"
                         android:id="@+id/edtCDollar"
                         android:textColor="@color/colorlvTitle"
-                        android:paddingLeft="@dimen/activity_horizontal_margin"
-                        android:hint="0" />
+                        android:hint="金額"
+                        android:textSize="25dp"
+                        android:padding="@dimen/lv_margin" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:gravity="center_horizontal"
+                        android:text="標註地點"
+                        android:id="@+id/txtLoc"
+                        android:longClickable="false"
+                        android:linksClickable="true"
+                        android:textSize="22dp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="339dp"
-            android:id="@+id/lvMember"
-            android:background="@color/colorlvBack"
-            android:fastScrollEnabled="false"
-            android:scrollIndicators="right"
-            android:visibility="visible"
-            android:padding="@dimen/lv_margin" />
-
-
-
-
-
-
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_height="match_parent">
 
-            <Button
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="確定"
-                android:id="@+id/btnAddC" />
+                android:layout_weight="0.1">
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lvMember"
+                    android:background="@color/colorlvBack"
+                    android:fastScrollEnabled="false"
+                    android:scrollIndicators="right"
+                    android:visibility="visible"
+                    android:padding="@dimen/lv_margin" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="bottom">
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="確定"
+                    android:id="@+id/btnAddC" />
+            </LinearLayout>
+
         </LinearLayout>
+
 
     </LinearLayout>
 

@@ -73,7 +73,7 @@ public class ConsumeAdapter extends BaseAdapter {
         Consume consume = (Consume) getItem(position);
         holder.txtcId.setText(consume.getcId());
         holder.txtcName.setText(consume.getcName());
-        holder.txtcDollar.setText(Double.toString(consume.getcDollar()));
+        holder.txtcDollar.setText(consume.getcDollar());
 
         return convertView;
     }

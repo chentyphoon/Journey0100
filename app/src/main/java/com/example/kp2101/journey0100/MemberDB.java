@@ -77,7 +77,7 @@ public class MemberDB {
         Member member = null;
         try {
             resultSet.next();
-            member = new Member(resultSet.getString("uId"), resultSet.getString("uName"), resultSet.getString("ujMoney"));
+            member = new Member(resultSet.getString("uId"), resultSet.getString("uName"), resultSet.getString("uFbid"), resultSet.getString("ujMoney"));
 
             //dbManager.statement.close();
             //resultSet.close();
@@ -102,7 +102,7 @@ public class MemberDB {
         List<Member> memberList = new ArrayList<Member>();
         try {
             while (resultSet.next()){
-                Member member = new Member(resultSet.getString("uId"), resultSet.getString("uName"), resultSet.getString("ujMoney"));
+                Member member = new Member(resultSet.getString("uId"), resultSet.getString("uName"), resultSet.getString("uFbid"), resultSet.getString("ujMoney"));
                 memberList.add(member);
             }
             //dbManager.statement.close();
