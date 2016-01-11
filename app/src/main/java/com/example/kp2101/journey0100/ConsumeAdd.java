@@ -31,6 +31,11 @@ public class ConsumeAdd extends AppCompatActivity  implements
     EditText edtCDollar;
     String cName;
     int cDollar;
+    String cLocation;
+    String cLon;
+    String cLat;
+    String cPic;
+    String cDescrip;
     GlobalVariable globalVariable;
 
     ListView lvMember;
@@ -94,7 +99,16 @@ public class ConsumeAdd extends AppCompatActivity  implements
                     cDollar = Integer.parseInt(edtCDollar.getText().toString());
                 }
                 refreshList();
-                String cId=ConsumeDB.addConsume(globalVariable.jId, cName, cDollar);
+
+
+
+                cLocation="";
+                cLon="";
+                cLat="";
+                cPic="";
+                cDescrip="";
+
+                String cId=ConsumeDB.addConsume(globalVariable.jId, cName, cDollar,cLocation,cLon,cLat,cPic,cDescrip);
                 ConsumeDB.addUserConsume(globalVariable.jId,cId,consumemembers);
                 Toast.makeText(ConsumeAdd.this,"新增成功",Toast.LENGTH_LONG).show();
                 finish();

@@ -19,8 +19,10 @@ public class ConsumeDB {
     public ConsumeDB(){
     }
 
-    public static String addConsume(String jId,String cName,Integer cDollar){
-        String sql = "INSERT INTO `consume` (cName,cDollar,jId) VALUES ('"+cName+"',"+cDollar+","+jId+");";
+
+
+    public static String addConsume(String jId, String cName, Integer cDollar, String cLocation, String cLon, String cLat, String cPic, String cDescrip){
+        String sql = "INSERT INTO `consume` (`jId`, `cName`, `cDollar`, `cLocation`, `cLon`, `cLat`, `cPic`, `cDescrip`) VALUES ('"+jId+"','"+cName+"','"+cDollar+"','"+cLocation+"','"+cLon+"','"+cLat+"','"+cPic+"','"+cDescrip+"');";
         //Log.d("addConsume", sql);
         String id = dbManager.DBexecuteUpdate(sql);
         return id;
