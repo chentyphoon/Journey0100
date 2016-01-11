@@ -53,7 +53,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:id="@+id/edtNeed"
             android:layout_weight="0.4"
             android:textColor="@color/colorMoney"
@@ -70,7 +70,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:id="@+id/edtPaid"
             android:layout_weight="0.4"
             android:textColor="@color/colorPaid"

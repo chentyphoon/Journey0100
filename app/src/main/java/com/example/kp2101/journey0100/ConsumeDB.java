@@ -19,7 +19,7 @@ public class ConsumeDB {
     public ConsumeDB(){
     }
 
-    public static String addConsume(String jId,String cName,Double cDollar){
+    public static String addConsume(String jId,String cName,Integer cDollar){
         String sql = "INSERT INTO `consume` (cName,cDollar,jId) VALUES ('"+cName+"',"+cDollar+","+jId+");";
         //Log.d("addConsume", sql);
         String id = dbManager.DBexecuteUpdate(sql);
@@ -27,38 +27,43 @@ public class ConsumeDB {
     }
     public static void addUserConsume(String jId,String cId,List<ConsumeMember> consumemembers){
         String uId;
-        String need;
-        String paid;
-        Double ujMoney=0.0;
-        String pay;
+        String need="";
+        String paid="";
+        String ujMoney="";
+        String pay="";
+        ResultSet resultSet;
         for(int pos=0;pos<consumemembers.size();pos++) {
             uId=consumemembers.get(pos).getuId();
-            need=String.valueOf(consumemembers.get(pos).getNeed());
-            paid=String.valueOf(consumemembers.get(pos).getPaid());
+            need=consumemembers.get(pos).getNeed();
+            paid=consumemembers.get(pos).getPaid();
 
             String sql = "INSERT INTO `userconsume` (uId,cId,need,paid) VALUES ("+uId+","+cId+","+need+","+paid+");";
-            //Log.d("addUserConsume", sql);
+            Log.d("addUserConsume", sql);
             dbManager.DBexecuteUpdate(sql);
 
-            String sql2="SELECT * FROM  `userjourney` where `uId`="+uId+" AND jId="+jId+";";
-            //Log.d("addUserConsume", sql2);
-            ResultSet resultSet = dbManager.DBexecute(sql2);
+            String sql2="SELECT * FROM  `userjourney` where `uId`="+uId+" AND `jId`="+jId+";";
+            Log.d("addUserConsume", sql2);
+            resultSet = dbManager.DBexecute(sql2);
             try {
                 while (resultSet.next()){
-                    ujMoney=resultSet.getDouble("ujMoney");
+
+                    Log.d("resultSet.getString(ujMoney)", resultSet.getString("ujMoney"));
+                    ujMoney=resultSet.getString("ujMoney");
                 }
                 //dbManager.statement.close();
                 //resultSet.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            Log.d("ujMoney",ujMoney);
+            Log.d("paid",paid);
+            Log.d("need",need);
+            pay = String.valueOf(Integer.parseInt(ujMoney) + Integer.parseInt(paid) - Integer.parseInt(need));
 
-
-            pay=String.valueOf(ujMoney+consumemembers.get(pos).getPaid()-consumemembers.get(pos).getNeed());
 
 
             String sql3 = "UPDATE `userjourney` SET `ujMoney`="+pay+" WHERE `uId`="+uId+" AND `jId`="+jId+";";
-            //Log.d("addUserConsume", sql3);
+            Log.d("addUserConsume", sql3);
             dbManager.DBexecuteUpdate(sql3);
 
         }

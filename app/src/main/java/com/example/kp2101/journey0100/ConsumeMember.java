@@ -7,8 +7,8 @@ public class ConsumeMember {
     String uId;
     String uName;
     boolean selected=false;
-    Double need=0.0;
-    Double paid=0.0;
+    String need="0";
+    String paid="0";
 
 
 
@@ -33,16 +33,16 @@ public class ConsumeMember {
         this.uName = uName;
     }
 
-    public Double getNeed() {
+    public String getNeed() {
         return need;
     }
 
-    public void setNeed(Double need){ this.need= need; };
+    public void setNeed(String need){ this.need= need; };
 
-    public Double getPaid() {
+    public String getPaid() {
         return paid;
     }
-    public void setPaid(Double paid){ this.paid= paid; };
+    public void setPaid(String paid){ this.paid= paid; };
 
     public boolean isSelected() {
         return selected;

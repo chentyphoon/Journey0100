@@ -22,10 +22,10 @@ public class TransDB {
 
     public static void addTrans(String jIdFrom,String uIdFrom,String uIdTo,String money){
 
-        Double ujMoneyFrom=0.0;
-        Double ujMoneyTo=0.0;
-        Double uAccountFrom=0.0;
-        Double uAccountTo=0.0;
+        int ujMoneyFrom=0;
+        int ujMoneyTo=0;
+        int uAccountFrom=0;
+        int uAccountTo=0;
         String sql = "INSERT INTO `transaction` (jId,uIdFrom,uIdTo,tMoney) VALUES ("+jIdFrom+","+uIdFrom+","+uIdTo+","+money+");";
         Log.d("addTrans",sql);
         dbManager.DBexecuteUpdate(sql);
@@ -36,7 +36,7 @@ public class TransDB {
         ResultSet resultSet = dbManager.DBexecute(sql2);
         try {
             while (resultSet.next()){
-                ujMoneyFrom=resultSet.getDouble("ujMoney");
+                ujMoneyFrom=Integer.parseInt(resultSet.getString("ujMoney"));
             }
             //dbManager.statement.close();
             //resultSet.close();
@@ -45,7 +45,7 @@ public class TransDB {
         }
         //Log.d("money",money);
         //Log.d("ujMoneyFrom",String.valueOf(ujMoneyFrom));
-        String ujMoneyFromNew=String.valueOf(ujMoneyFrom+Double.parseDouble(money));
+        String ujMoneyFromNew=String.valueOf(ujMoneyFrom + Integer.parseInt(money));
         //Log.d("ujMoneyFromNew",ujMoneyFromNew);
 
 
@@ -60,7 +60,7 @@ public class TransDB {
         ResultSet resultSet2 = dbManager.DBexecute(sql4);
         try {
             while (resultSet2.next()){
-                ujMoneyTo=resultSet2.getDouble("ujMoney");
+                ujMoneyTo=Integer.parseInt(resultSet2.getString("ujMoney"));
             }
             //dbManager.statement.close();
             //resultSet.close();
@@ -69,7 +69,7 @@ public class TransDB {
         }
         //Log.d("money",money);
         Log.d("ujMoneyTo",String.valueOf(ujMoneyTo));
-        String ujMoneyToNew=String.valueOf(ujMoneyTo-Double.parseDouble(money));
+        String ujMoneyToNew=String.valueOf(ujMoneyTo-Integer.parseInt(money));
         Log.d("ujMoneyToNew",ujMoneyToNew);
 
 
@@ -86,7 +86,8 @@ public class TransDB {
         ResultSet resultSet3 = dbManager.DBexecute(sql6);
         try {
             while (resultSet3.next()){
-                uAccountFrom=resultSet3.getDouble("uAccount");
+                uAccountFrom=Integer.parseInt(resultSet3.getString("uAccount"));
+
             }
             //dbManager.statement.close();
             //resultSet.close();
@@ -95,7 +96,7 @@ public class TransDB {
         }
         //Log.d("money",money);
         //Log.d("ujMoneyFrom",String.valueOf(ujMoneyFrom));
-        String uAccountFromNew=String.valueOf(uAccountFrom-Double.parseDouble(money));
+        String uAccountFromNew=String.valueOf(uAccountFrom-Integer.parseInt(money));
         //Log.d("ujMoneyFromNew",ujMoneyFromNew);
 
 
@@ -110,7 +111,7 @@ public class TransDB {
         ResultSet resultSet4 = dbManager.DBexecute(sql8);
         try {
             while (resultSet4.next()){
-                uAccountTo=resultSet4.getDouble("uAccount");
+                uAccountTo=Integer.parseInt(resultSet4.getString("uAccount"));
             }
             //dbManager.statement.close();
             //resultSet.close();
@@ -119,7 +120,7 @@ public class TransDB {
         }
         //Log.d("money",money);
         //Log.d("ujMoneyFrom",String.valueOf(ujMoneyFrom));
-        String uAccountToNew=String.valueOf(uAccountTo+Double.parseDouble(money));
+        String uAccountToNew=String.valueOf(uAccountTo+Integer.parseInt(money));
         //Log.d("ujMoneyFromNew",ujMoneyFromNew);
 
 

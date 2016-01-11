@@ -109,5 +109,5 @@ public class JSubActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    
+
 }

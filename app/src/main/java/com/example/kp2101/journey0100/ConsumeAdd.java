@@ -30,7 +30,7 @@ public class ConsumeAdd extends AppCompatActivity  implements
     EditText edtCName;
     EditText edtCDollar;
     String cName;
-    Double cDollar;
+    int cDollar;
     GlobalVariable globalVariable;
 
     ListView lvMember;
@@ -89,9 +89,9 @@ public class ConsumeAdd extends AppCompatActivity  implements
             public void onClick(View v) {
                 cName = edtCName.getText().toString();
                 if(edtCDollar.getText().equals("")){
-                    cDollar=0.0;
+                    cDollar=0;
                 }else {
-                    cDollar = Double.parseDouble(edtCDollar.getText().toString());
+                    cDollar = Integer.parseInt(edtCDollar.getText().toString());
                 }
                 refreshList();
                 String cId=ConsumeDB.addConsume(globalVariable.jId, cName, cDollar);
@@ -147,31 +147,46 @@ public class ConsumeAdd extends AppCompatActivity  implements
 
     //重新分配每個member的應付金額
     public void setNeed(){
+        if(checkmember.size()!=0 && !edtCDollar.getText().toString().equals("")){
+
+
         //Log.d("checkmember", checkmember.toString());
         //Log.d("cDollar", edtCDollar.getText().toString());
         //Log.d("checkmember size", Integer.toString(checkmember.size()));
 
 
         //計算平均分攤
-        if(edtCDollar.getText().equals("")){
-            cDollar=0.0;
-        }else {
-            cDollar = Double.parseDouble(edtCDollar.getText().toString());
-        }
-        double mean=cDollar/(double)checkmember.size();
+        cDollar = Integer.parseInt(edtCDollar.getText().toString());
+        Log.d("cDollar", String.valueOf(cDollar));
+
+
+        int remainder=cDollar%checkmember.size();
+        Log.d("remainder", String.valueOf(remainder));
+
+        int mean=(cDollar-remainder)/checkmember.size();
+        Log.d("mean", String.valueOf(mean));
+
+
 
 
         //重設每個pos的應付金額
         for(int pos=0;pos<consumemembers.size();pos++) {
 
             if(checkmember.get(pos)!=null) {
-                consumemembers.get(pos).setNeed(mean);
+                if(remainder!=0) {
+                    consumemembers.get(pos).setNeed(String.valueOf(mean+1));
+                    remainder--;
+                }else{
+                    consumemembers.get(pos).setNeed(String.valueOf(mean));
+                }
+
             }else{
-                consumemembers.get(pos).setNeed(0.0);
+                consumemembers.get(pos).setNeed("0");
             }
 
         }
         refreshList();
+        }
 
 
     }

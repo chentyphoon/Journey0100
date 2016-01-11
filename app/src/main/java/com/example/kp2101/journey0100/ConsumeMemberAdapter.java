@@ -146,7 +146,7 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
                         for (int i = 0; i < consumemembers.size(); i++) {
                             Log.d("consumemembers.get(i)", String.valueOf(consumemembers.get(i)));
                             if (tag.compareToIgnoreCase(String.valueOf(consumemembers.get(i))) == 0) {
-                                consumemembers.get(i).setNeed(Double.parseDouble(val));
+                                consumemembers.get(i).setNeed(val);
                             }
                         }
                     }
@@ -174,7 +174,7 @@ public class ConsumeMemberAdapter extends ArrayAdapter {
                         for(int i=0; i<consumemembers.size(); i++){
                             Log.d("consumemembers.get(i)", String.valueOf(consumemembers.get(i)));
                             if(tag.compareToIgnoreCase(String.valueOf(consumemembers.get(i))) == 0){
-                                consumemembers.get(i).setPaid(Double.parseDouble(val));
+                                consumemembers.get(i).setPaid(val);
                             }
                         }
                     }
