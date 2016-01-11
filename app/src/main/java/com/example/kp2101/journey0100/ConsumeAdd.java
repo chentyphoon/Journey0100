@@ -4,9 +4,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,9 +21,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +43,7 @@ public class ConsumeAdd extends AppCompatActivity implements
     EditText edtCName;
     EditText edtCDollar;
     String cName;
+    ImageView ivPic;
     int cDollar;
     String cLocation;
     String cLon;
@@ -46,6 +54,7 @@ public class ConsumeAdd extends AppCompatActivity implements
     Double lat;
     GlobalVariable globalVariable;
     ShowMap mapFrag;
+    Uri imageUri = null;
 
     ListView lvMember;
     List<ConsumeMember> consumemembers = null;
@@ -53,6 +62,8 @@ public class ConsumeAdd extends AppCompatActivity implements
     Map<Integer, String> checkmember = new HashMap<Integer, String>();
     private LocationManager mLocationManager;
     private Location location;
+    private String fileName="consume-";
+    private FileInputStream inputImage = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,17 +97,30 @@ public class ConsumeAdd extends AppCompatActivity implements
         btnAddC = (Button) findViewById(R.id.btnAddC);
         edtCName = (EditText) findViewById(R.id.edtCName);
         edtCDollar = (EditText) findViewById(R.id.edtCDollar);
-
+        ivPic = (ImageView) findViewById(R.id.ivPic);
 
 
         lvMember = (ListView) findViewById(R.id.lvMember);
         getConsumeMemberList();
 
-        mapFrag = ShowMap.newInstance(lat, lon);
-        getFragmentManager().beginTransaction()
-                .replace(R.id.flMap,mapFrag)
-                .commit();
+//        mapFrag = ShowMap.newInstance(lat, lon);
+//        getFragmentManager().beginTransaction()
+//                .replace(R.id.flMap,mapFrag)
+//                .commit();
 
+        ivPic.setImageResource(R.drawable.ic_insert_photo_white_48dp);
+
+        ivPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivityForResult(ImageSelector.select(), ImageSelector.SELECT_PHOTO);
+
+//                Intent photoIntent = new Intent(Intent.ACTION_PICK);
+//                photoIntent.setType("image/*");
+//                startActivityForResult(photoIntent, SELECT_PHOTO);
+            }
+        });
 //        //點ListView觸發檢視行程
 //        lvMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -143,12 +167,56 @@ public class ConsumeAdd extends AppCompatActivity implements
                 String cId=ConsumeDB.addConsume(globalVariable.jId, cName, cDollar,cLocation,cLon,cLat,cPic,cDescrip);
                 ConsumeDB.addUserConsume(globalVariable.jId,cId,consumemembers);
                 Toast.makeText(ConsumeAdd.this,"新增成功",Toast.LENGTH_LONG).show();
+
+                try {
+                    inputImage = (FileInputStream) getContentResolver().openInputStream(imageUri);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                ImageUploader imageUploader = new ImageUploader(fileName);
+                imageUploader.uploadFile(cId, inputImage);
                 finish();
             }
         });
 
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == ImageSelector.SELECT_PHOTO && resultCode == RESULT_OK) {
+            Log.d("data", data.getDataString());
+            imageUri = data.getData();
+            //ivAddPic.setImageURI(imageUri);
+            //startActivityForResult(ImageSelector.doCrop(imageUri), ImageSelector.CROP_OK);
+            //test
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                imageUri = ImageSelector.bitmapToFile(bitmap);
+                ivPic.setImageURI(imageUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //test end
+            //reduceImage();
+
+            //ivPhoto.setImageURI(imageUri);
+        }else {
+            if (requestCode == ImageSelector.CROP_OK) {
+                Bundle extras = data.getExtras();
+                if (extras != null) {
+                    Bitmap photo = (Bitmap) extras.get("data");
+                    imageUri = ImageSelector.bitmapToFile(photo);
+                    ivPic.setImageURI(imageUri);
+                }
+                //imageUri = data.getData();
+
+
+            }
+        }
     }
 
     //撈下半部member list

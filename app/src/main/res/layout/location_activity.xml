@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/lv_margin">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorUjMe"
+            android:layout_margin="@dimen/lv_margin">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/ivuPic"
+                android:layout_weight="0.03"
+                android:layout_alignParentLeft="true"
+                android:padding="1dp"
+                android:layout_margin="@dimen/lv_margin" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/editText"
+                android:layout_weight="0.97"
+                android:hint="輸入地點" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvMember"
+            android:padding="@dimen/lv_margin"
+            android:layout_weight="0.5"
+            android:background="@color/colorlvBack" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

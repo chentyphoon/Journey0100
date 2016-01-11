@@ -26,11 +26,10 @@
                 android:layout_height="111dp"
                 android:layout_weight="6">
 
-                <FrameLayout
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/flMAp"
-                    android:padding="@dimen/lv_margin"></FrameLayout>
+                    android:id="@+id/ivPic" />
             </LinearLayout>
 
             <LinearLayout
