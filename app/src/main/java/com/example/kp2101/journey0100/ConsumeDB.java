@@ -19,8 +19,9 @@ public class ConsumeDB {
     public ConsumeDB(){
     }
 
-    public static String addConsume(String jId,String cName,Double cDollar){
-        String sql = "INSERT INTO `consume` (cName,cDollar,jId) VALUES ('"+cName+"',"+cDollar+","+jId+");";
+    public static String addConsume(String jId, String cName, String cDollar, String cLocation, String cLon, String cLat,
+                                    String cTime, String cPic, String cDescrip){
+        String sql = "INSERT INTO `consume` (cName,cDollar,jId) VALUES ('"+cName+"',"+cDollar+","+jId+","+");";
         //Log.d("addConsume", sql);
         String id = dbManager.DBexecuteUpdate(sql);
         return id;
@@ -29,7 +30,7 @@ public class ConsumeDB {
         String uId;
         String need;
         String paid;
-        Double ujMoney=0.0;
+        int ujMoney=0;
         String pay;
         for(int pos=0;pos<consumemembers.size();pos++) {
             uId=consumemembers.get(pos).getuId();
@@ -78,7 +79,9 @@ public class ConsumeDB {
         List<Consume> consumeList = new ArrayList<Consume>();
         try {
             while (resultSet.next()){
-                Consume consume = new Consume(resultSet.getString("cId"), resultSet.getString("cName"), resultSet.getDouble("cDollar"));
+                Consume consume = new Consume(resultSet.getString("cId"), resultSet.getString("cName"), resultSet.getString("cDollar"),
+                        resultSet.getString("cLocation"), resultSet.getString("cLon"), resultSet.getString("cLat"),
+                        resultSet.getString("cTime"), resultSet.getString("cPic"), resultSet.getString("cDescrip"));
                 consumeList.add(consume);
             }
             //dbManager.statement.close();

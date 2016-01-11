@@ -32,6 +32,7 @@ public class ConsumeAdd extends AppCompatActivity  implements
     String cName;
     Double cDollar;
     GlobalVariable globalVariable;
+    ShowMap mapFrag;
 
     ListView lvMember;
     List<ConsumeMember> consumemembers=null;

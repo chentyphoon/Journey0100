@@ -66,6 +66,8 @@ public class JourneyAdd  extends AppCompatActivity {
         btnAddJ = (Button) findViewById(R.id.btnAddJ);
         edtJName = (EditText) findViewById(R.id.edtJName);
 
+        ivAddPic.setImageResource(R.drawable.ic_insert_photo_white_48dp);
+
         ivAddPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,12 +107,13 @@ public class JourneyAdd  extends AppCompatActivity {
         if(requestCode == ImageSelector.SELECT_PHOTO && resultCode == RESULT_OK) {
             Log.d("data", data.getDataString());
             imageUri = data.getData();
-            ivAddPic.setImageURI(imageUri);
+            //ivAddPic.setImageURI(imageUri);
             //startActivityForResult(ImageSelector.doCrop(imageUri), ImageSelector.CROP_OK);
             //test
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 imageUri = ImageSelector.bitmapToFile(bitmap);
+                ivAddPic.setImageURI(imageUri);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -123,9 +126,8 @@ public class JourneyAdd  extends AppCompatActivity {
                 Bundle extras = data.getExtras();
                 if (extras != null) {
                     Bitmap photo = (Bitmap) extras.get("data");
-                    ivAddPic.setImageBitmap(photo);
                     imageUri = ImageSelector.bitmapToFile(photo);
-
+                    ivAddPic.setImageURI(imageUri);
                 }
                 //imageUri = data.getData();
 
