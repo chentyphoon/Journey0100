@@ -29,7 +29,8 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/ivPic" />
+                    android:id="@+id/ivPic"
+                    android:src="@android:drawable/ic_menu_gallery" />
             </LinearLayout>
 
             <LinearLayout
@@ -80,7 +81,15 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/llLocation">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView3"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:src="@drawable/ic_loc" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -92,6 +101,7 @@
                         android:longClickable="false"
                         android:linksClickable="true"
                         android:textSize="22dp" />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -110,7 +120,7 @@
 
                 <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="329dp"
                     android:id="@+id/lvMember"
                     android:background="@color/colorlvBack"
                     android:fastScrollEnabled="false"
@@ -131,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:text="確定"
                     android:id="@+id/btnAddC"
-                    android:gravity="bottom|end"/>
+                    android:layout_gravity="center" />
             </LinearLayout>
 
         </LinearLayout>

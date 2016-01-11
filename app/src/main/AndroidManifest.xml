@@ -6,14 +6,14 @@
 
         android:name=".GlobalVariable"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_app"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDmInRGRQZoi1UzIRBlNUMQDv2Algn5mmk"/>
+            android:value="AIzaSyAnSEeP9p8dfiPc_rMEc_6PkRo5BGRUNB8"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -27,15 +27,16 @@
         <activity android:name=".JourneyActivity"></activity>
         <activity android:name=".Journey"></activity>
         <activity android:name=".JourneyAdapter"></activity>
-        <activity android:name=".JourneyDB"></activity>
+
         <activity android:name=".JourneyAdd"></activity>
-        <activity android:name=".DBManager"></activity>
+
         <activity android:name=".JSubActivity"></activity>
 
         <activity android:name=".MemberAdd"></activity>
         <activity android:name=".ConsumeAdd"></activity>
 
         <activity android:name=".transActivity"></activity>
+        <activity android:name=".LocationActivity"></activity>
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"

@@ -10,12 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:layout_gravity="bottom">
+        android:layout_gravity="center"
+        android:weightSum="1"
+        android:gravity="bottom">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="281dp"
+            android:layout_height="121dp"
             android:id="@+id/imageView"
+            android:src="@drawable/logo"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
@@ -29,26 +32,17 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:id="@+id/fb_login"
+            android:padding="@dimen/lv_margin"
+            android:weightSum="1">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="185dp"
+                android:layout_height="86dp"
                 android:id="@+id/imageView2"
-                android:src="@drawable/ic_facebook" />
-
-            <TextView
-                android:layout_width="192dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Login"
-                android:id="@+id/textView4"
-                android:textStyle="bold"
-                android:textSize="35dp"
-                android:textColor="#ffffff"
-                android:padding="@dimen/lv_margin"
-                android:background="@color/colorPrimaryDark"
-                android:gravity="center_horizontal" />
+                android:longClickable="false"
+                android:src="@drawable/ic_facebook_600" />
         </LinearLayout>
     </LinearLayout>
 

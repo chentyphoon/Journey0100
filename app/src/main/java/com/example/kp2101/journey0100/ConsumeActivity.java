@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -52,6 +53,16 @@ public class ConsumeActivity extends Fragment {
                 }
             });
 
+//            lvConsume.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//                @Override
+//                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                    Consume c = (Consume) consumeAdapter.getItem(position);
+//                    String cId = c.getcId();
+//                    ConsumeDB.
+//                    return false;
+//                }
+//            });
+
             return view;
         }
         @Override
@@ -71,6 +82,8 @@ public class ConsumeActivity extends Fragment {
             //Log.d("adaper", "after");
 
         }
+
+
 
 
 

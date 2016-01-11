@@ -20,25 +20,34 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/ivuPic"
+                android:id="@+id/ivlPic"
                 android:layout_weight="0.03"
                 android:layout_alignParentLeft="true"
                 android:padding="1dp"
-                android:layout_margin="@dimen/lv_margin" />
+                android:layout_margin="@dimen/lv_margin"
+                android:src="@drawable/ic_loc" />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/editText"
+                android:id="@+id/edtName"
                 android:layout_weight="0.97"
-                android:hint="輸入地點" />
+                android:hint="選擇或輸入地點"
+                android:textColor="@color/colorlvTitle" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="確定"
+                android:id="@+id/btnOk" />
 
         </LinearLayout>
 
         <ListView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/lvMember"
+            android:id="@+id/lvLocation"
             android:padding="@dimen/lv_margin"
             android:layout_weight="0.5"
             android:background="@color/colorlvBack" />
