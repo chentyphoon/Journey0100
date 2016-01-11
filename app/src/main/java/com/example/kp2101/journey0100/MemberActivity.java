@@ -86,6 +86,8 @@ public class MemberActivity extends Fragment {
     }
     @Override
     public void onStart() {
+        jMe=MemberDB.memberMe(globalVariable.jId,globalVariable.uId);
+        txtjMeMoney.setText(jMe.getujMoney()+"   NT $");
         getMemberList();
         super.onStart();
     }
@@ -100,6 +102,7 @@ public class MemberActivity extends Fragment {
         //Log.d("adaper", "after");
 
     }
+
 
 
 
