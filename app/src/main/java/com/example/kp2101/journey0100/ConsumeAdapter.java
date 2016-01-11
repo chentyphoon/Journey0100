@@ -88,6 +88,7 @@ public class ConsumeAdapter extends BaseAdapter {
         holder.txtcId.setText(consume.getcId());
         holder.txtcName.setText(consume.getcName());
         holder.txtcDollar.setText(consume.getcDollar());
+
         ImageLoader.getInstance().displayImage(consume.getcPic(), holder.ivcPic, options, animateFirstListener);
 
         return convertView;

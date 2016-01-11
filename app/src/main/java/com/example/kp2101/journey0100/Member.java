@@ -6,13 +6,15 @@ package com.example.kp2101.journey0100;
 public class Member {
     String uId;
     String uName;
+    String uFbid;
     String ujMoney;
     boolean selected=false;
 
 
-    public Member(String uId, String uName,String ujMoney){
+    public Member(String uId, String uName, String uFbid,String ujMoney){
         this.uId = uId;
         this.uName = uName;
+        this.uFbid = uFbid;
         this.ujMoney = ujMoney;
 
     }
@@ -32,6 +34,16 @@ public class Member {
     public void setuName(String uName) {
         this.uName = uName;
     }
+
+
+    public String getuFbid () {
+        return uFbid ;
+    }
+
+    public void setuFbid (String uFbid ) {
+        this.uFbid  = uFbid ;
+    }
+
 
     public String getujMoney() {
         return ujMoney;

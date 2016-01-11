@@ -13,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class MemberActivity extends Fragment {
     private Member jMe=null;
     TextView txtjMeName;
     TextView txtjMeMoney;
+    ImageView ivuPic;
 
     GlobalVariable globalVariable;
 
@@ -46,10 +49,16 @@ public class MemberActivity extends Fragment {
         //撈Me
         txtjMeName = (TextView) view.findViewById(R.id.txtjMeName);
         txtjMeMoney = (TextView) view.findViewById(R.id.txtjMeMoney);
-        jMe=MemberDB.memberMe(globalVariable.jId,globalVariable.uId);
+
+
+        jMe=MemberDB.memberMe(globalVariable.jId, globalVariable.uId);
+        globalVariable.uName=jMe.getuName();
         txtjMeName.setText(jMe.getuName());
         txtjMeMoney.setText(jMe.getujMoney()+"   NT $");
 
+        ivuPic = (ImageView) view.findViewById(R.id.ivuPic);
+        ImageLoader imageLoader = ImageLoader.getInstance(); // Get singleton instance
+        imageLoader.displayImage("http://graph.facebook.com/"+jMe.getuFbid()+"/picture?width=90&height=90", ivuPic);
 
         //撈MemberList
         lvMember = (ListView) view.findViewById(R.id.lvMember);

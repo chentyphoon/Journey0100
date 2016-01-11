@@ -63,11 +63,13 @@ public class transActivity extends AppCompatActivity {
         //抓全域變數
         globalVariable = (GlobalVariable)getApplicationContext();
         uIdFrom=globalVariable.uId;
+        uNameFrom=globalVariable.uName;
         jIdFrom=globalVariable.jId;
         //Log.d("jIdFrom",jIdFrom);
 
         //抓上一個activity傳來的uIdTo
         uIdTo = getIntent().getExtras().getString("uIdTo");
+        uNameTo = getIntent().getExtras().getString("uNameTo");
 
 
 
@@ -169,7 +171,9 @@ public class transActivity extends AppCompatActivity {
             byte[] payload1 = messages[0].getRecords()[1].getPayload();
             byte[] payload2 = messages[0].getRecords()[2].getPayload();
             byte[] payload3 = messages[0].getRecords()[3].getPayload();
-            setNoteBody(new String(payload), new String(payload1), new String(payload2), new String(payload3));
+            byte[] payload4 = messages[0].getRecords()[4].getPayload();
+            byte[] payload5 = messages[0].getRecords()[5].getPayload();
+            setNoteBody(new String(payload), new String(payload1), new String(payload2), new String(payload3), new String(payload4), new String(payload5));
             setIntent(new Intent()); // Consume this intent.
         }
         enableNdefExchangeMode();
@@ -227,6 +231,9 @@ public class transActivity extends AppCompatActivity {
         final String receiveuIdFrom = new String(msg.getRecords()[1].getPayload());
         final String receiveuIdTo = new String(msg.getRecords()[2].getPayload());
         final String receiveMoney = new String(msg.getRecords()[3].getPayload());
+        final String receiveuNameFrom = new String(msg.getRecords()[4].getPayload());
+        final String receiveuNameTo = new String(msg.getRecords()[5].getPayload());
+
 
 
 
@@ -235,12 +242,12 @@ public class transActivity extends AppCompatActivity {
         Toast.makeText(this,"globalVariable.uId="+globalVariable.uId , Toast.LENGTH_SHORT).show();
 
         if(receiveuIdTo.equals(globalVariable.uId) && receivejIdFrom.equals(globalVariable.jId)) {
-            new AlertDialog.Builder(this).setTitle("從" + receiveuIdTo + "收到金額 " + receiveMoney + "\n是否確認")
+            new AlertDialog.Builder(this).setTitle("從" + receiveuNameFrom + "收到金額 " + receiveMoney + "\n是否確認")
                     .setPositiveButton("是", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
                             String body = new String(msg.getRecords()[0].getPayload());
-                            setNoteBody(receivejIdFrom, receiveuIdFrom,receiveuIdTo, receiveMoney);
+                            setNoteBody(receivejIdFrom, receiveuIdFrom,receiveuIdTo, receiveMoney, receiveuNameFrom, receiveuNameTo);
                         }
                     })
                     .setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -255,11 +262,11 @@ public class transActivity extends AppCompatActivity {
         }
     }
 
-    private void setNoteBody(String jIdFrom, String uIdFrom,String uIdTo, String money) {
+    private void setNoteBody(String jIdFrom, String uIdFrom,String uIdTo, String money, String uNameFrom, String uNameTo) {
         //Editable text = mNote.getText();
         //text.clear();
         //text.append(body);
-        tvReceived.setText(uIdFrom+ " 給 " + uIdTo + " $" + money);
+        tvReceived.setText(uNameFrom+ " 給 " + uNameTo + " $" + money);
         tvReceived.setVisibility(View.VISIBLE);
         mNote.setEnabled(true);
 
@@ -275,11 +282,15 @@ public class transActivity extends AppCompatActivity {
         byte[] txtBuIdFrom = uIdFrom.getBytes();
         byte[] txtBuIdTo = uIdTo.getBytes();
         byte[] txtBMoney = mNote.getText().toString().getBytes();
+        byte[] txtBuNameFrom = uNameFrom.toString().getBytes();
+        byte[] txtBuNameTo = uNameTo.toString().getBytes();
         NdefRecord txtRjIdFrom = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, "text/plain".getBytes(), new byte[] {}, txtBjIdFrom);
         NdefRecord txtRuIdFrom = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, "text/plain".getBytes(), new byte[] {}, txtBuIdFrom);
         NdefRecord txtRuIdTo = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, "text/plain".getBytes(), new byte[] {}, txtBuIdTo);
         NdefRecord txtRMoney = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, "text/plain".getBytes(), new byte[] {}, txtBMoney);
-        return new NdefMessage(new NdefRecord[] {txtRjIdFrom, txtRuIdFrom,txtRuIdTo,txtRMoney});
+        NdefRecord txtRuNameFrom = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, "text/plain".getBytes(), new byte[] {}, txtBuNameFrom);
+        NdefRecord txtRuNameTo = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, "text/plain".getBytes(), new byte[] {}, txtBuNameTo);
+        return new NdefMessage(new NdefRecord[] {txtRjIdFrom, txtRuIdFrom,txtRuIdTo,txtRMoney,txtRuNameFrom,txtRuNameTo});
     }
 
     NdefMessage[] getNdefMessages(Intent intent) {
