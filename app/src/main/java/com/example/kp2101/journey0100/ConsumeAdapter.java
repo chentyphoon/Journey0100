@@ -8,6 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
 import java.util.List;
 
 /**
@@ -17,13 +21,23 @@ public class ConsumeAdapter extends BaseAdapter {
 
     private List<Consume> consumes;
     private LayoutInflater inflater;
-
+    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+    private DisplayImageOptions options;
     //private int resource;
 
     public ConsumeAdapter(Context context, List<Consume> consumes) {
 
         inflater = LayoutInflater.from(context);
         this.consumes = consumes;
+        options = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.loading)
+                .showImageForEmptyUri(android.R.drawable.ic_menu_gallery)
+                .showImageOnFail(android.R.drawable.ic_menu_close_clear_cancel)
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .considerExifParams(true)
+                        //.displayer(new CircleBitmapDisplayer(Color.WHITE, 5))
+                .build();
     }
 
     @Override
@@ -73,7 +87,8 @@ public class ConsumeAdapter extends BaseAdapter {
         Consume consume = (Consume) getItem(position);
         holder.txtcId.setText(consume.getcId());
         holder.txtcName.setText(consume.getcName());
-        holder.txtcDollar.setText(Double.toString(consume.getcDollar()));
+        holder.txtcDollar.setText(consume.getcDollar());
+        ImageLoader.getInstance().displayImage(consume.getcPic(), holder.ivcPic, options, animateFirstListener);
 
         return convertView;
     }

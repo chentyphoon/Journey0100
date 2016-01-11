@@ -1,7 +1,13 @@
 package com.example.kp2101.journey0100;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -23,7 +29,7 @@ import java.util.Map;
 /**
  * Created by KP2101 on 2016/1/7.
  */
-public class ConsumeAdd extends AppCompatActivity  implements
+public class ConsumeAdd extends AppCompatActivity implements
         android.widget.CompoundButton.OnCheckedChangeListener {
 
     Button btnAddC;
@@ -36,13 +42,17 @@ public class ConsumeAdd extends AppCompatActivity  implements
     String cLat;
     String cPic;
     String cDescrip;
+    Double lon;
+    Double lat;
     GlobalVariable globalVariable;
     ShowMap mapFrag;
 
     ListView lvMember;
-    List<ConsumeMember> consumemembers=null;
-    ConsumeMemberAdapter consumememberAdapter=null;
-    Map<Integer,String> checkmember= new HashMap<Integer,String>();
+    List<ConsumeMember> consumemembers = null;
+    ConsumeMemberAdapter consumememberAdapter = null;
+    Map<Integer, String> checkmember = new HashMap<Integer, String>();
+    private LocationManager mLocationManager;
+    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +61,23 @@ public class ConsumeAdd extends AppCompatActivity  implements
         setContentView(R.layout.consume_add);
 
 
-        globalVariable = (GlobalVariable)getApplicationContext();
-
+        globalVariable = (GlobalVariable) getApplicationContext();
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+//            public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+//
+//            }
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        lon = location.getLongitude();
+        lat = location.getLatitude();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,8 +88,14 @@ public class ConsumeAdd extends AppCompatActivity  implements
         edtCDollar = (EditText) findViewById(R.id.edtCDollar);
 
 
+
         lvMember = (ListView) findViewById(R.id.lvMember);
         getConsumeMemberList();
+
+        mapFrag = ShowMap.newInstance(lat, lon);
+        getFragmentManager().beginTransaction()
+                .replace(R.id.flMap,mapFrag)
+                .commit();
 
 //        //點ListView觸發檢視行程
 //        lvMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
