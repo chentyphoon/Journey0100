@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
 
         //final Intent intent = this.getIntent();
         //bundle = intent.getExtras();
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
             //找到button
 
-            Button loginButton = (Button) findViewById(R.id.fb_login);
+            LinearLayout loginButton = (LinearLayout) findViewById(R.id.fb_login);
 
             loginButton.setOnClickListener(new Button.OnClickListener() {
 

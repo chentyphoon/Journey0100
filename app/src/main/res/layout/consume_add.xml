@@ -27,10 +27,11 @@
                 android:layout_weight="6">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:id="@+id/ivPic"
-                    android:visibility="visible" />
+                    android:src="@android:drawable/ic_menu_gallery" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -61,7 +62,8 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    >
 
 
 
@@ -80,7 +82,15 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/llLocation">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/imageView3"
+                        android:paddingLeft="@dimen/activity_horizontal_margin"
+                        android:src="@drawable/ic_loc" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -92,6 +102,7 @@
                         android:longClickable="false"
                         android:linksClickable="true"
                         android:textSize="22dp" />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -105,11 +116,12 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.1">
+                android:layout_weight="0.1"
+                android:layout_below="@+id/btnAddC">
 
                 <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="329dp"
                     android:id="@+id/lvMember"
                     android:background="@color/colorlvBack"
                     android:fastScrollEnabled="false"
@@ -123,13 +135,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="bottom">
+                >
 
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="確定"
-                    android:id="@+id/btnAddC" />
+                    android:id="@+id/btnAddC"
+                    android:layout_gravity="center" />
             </LinearLayout>
 
         </LinearLayout>

@@ -22,7 +22,9 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
@@ -39,22 +41,25 @@ import java.util.Map;
 public class ConsumeAdd extends AppCompatActivity implements
         android.widget.CompoundButton.OnCheckedChangeListener {
 
+    final int LOCATION_CODE = 777;
     Button btnAddC;
     EditText edtCName;
     EditText edtCDollar;
+    TextView tvLoc;
     String cName;
     ImageView ivPic;
     int cDollar;
-    String cLocation;
-    String cLon;
-    String cLat;
+    String cLocation="";
+    String cLon="";
+    String cLat="";
     String cPic;
-    String cDescrip;
+    String cDescrip="";
     Double lon;
     Double lat;
     GlobalVariable globalVariable;
     ShowMap mapFrag;
     Uri imageUri = null;
+    LinearLayout llLocation;
 
     ListView lvMember;
     List<ConsumeMember> consumemembers = null;
@@ -98,7 +103,9 @@ public class ConsumeAdd extends AppCompatActivity implements
         edtCName = (EditText) findViewById(R.id.edtCName);
         edtCDollar = (EditText) findViewById(R.id.edtCDollar);
         ivPic = (ImageView) findViewById(R.id.ivPic);
-
+        //ivPic.setImageResource(android.R.drawable.ic_menu_gallery);
+        llLocation = (LinearLayout) findViewById(R.id.llLocation);
+        tvLoc = (TextView) findViewById(R.id.txtLoc);
 
         lvMember = (ListView) findViewById(R.id.lvMember);
         getConsumeMemberList();
@@ -107,6 +114,21 @@ public class ConsumeAdd extends AppCompatActivity implements
 //        getFragmentManager().beginTransaction()
 //                .replace(R.id.flMap,mapFrag)
 //                .commit();
+
+        llLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+             //   Log.d("JA getItem Jid",jId);
+                Intent myIntent = new Intent(ConsumeAdd.this,LocationActivity.class);
+                myIntent.putExtra("lon", String.valueOf(lon));
+                myIntent.putExtra("lat", String.valueOf(lat));
+                Log.d("intent", myIntent.toString());
+                startActivityForResult(myIntent, LOCATION_CODE);
+
+            }
+        });
+
 
         ivPic.setImageResource(R.drawable.ic_insert_photo_white_48dp);
 
@@ -158,11 +180,11 @@ public class ConsumeAdd extends AppCompatActivity implements
 
 
 
-                cLocation="";
-                cLon="";
-                cLat="";
-                cPic="";
-                cDescrip="";
+//                cLocation="";
+//                cLon="";
+//                cLat="";
+//                cPic="";
+//                cDescrip="";
 
                 String cId=ConsumeDB.addConsume(globalVariable.jId, cName, cDollar,cLocation,cLon,cLat,cPic,cDescrip);
                 ConsumeDB.addUserConsume(globalVariable.jId,cId,consumemembers);
@@ -191,15 +213,15 @@ public class ConsumeAdd extends AppCompatActivity implements
             Log.d("data", data.getDataString());
             imageUri = data.getData();
             //ivAddPic.setImageURI(imageUri);
-            //startActivityForResult(ImageSelector.doCrop(imageUri), ImageSelector.CROP_OK);
+            startActivityForResult(ImageSelector.doCrop(imageUri), ImageSelector.CROP_OK);
             //test
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                imageUri = ImageSelector.bitmapToFile(bitmap);
-                ivPic.setImageURI(imageUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+//                imageUri = ImageSelector.bitmapToFile(bitmap);
+//                ivPic.setImageURI(imageUri);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
             //test end
             //reduceImage();
 
@@ -216,6 +238,16 @@ public class ConsumeAdd extends AppCompatActivity implements
 
 
             }
+        }
+
+        if(requestCode==LOCATION_CODE){
+            lat = Double.parseDouble(data.getExtras().getString("lat"));
+            lon = Double.parseDouble(data.getExtras().getString("lon"));
+            cLat = data.getExtras().getString("lat");
+            cLon = data.getExtras().getString("lon");
+            cLocation = data.getExtras().getString("location");
+            tvLoc.setText(cLocation);
+
         }
     }
 

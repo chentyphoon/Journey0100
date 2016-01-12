@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Journey0100</string>
+    <string name="app_name">gogoDutch</string>
     <string name="action_logout">logout</string>
     <string name="action_account">account</string>
     <string name="action_settings">Settings</string>

@@ -73,8 +73,8 @@ public class ConsumeDB {
 
     }
 
-    public static void deleteJourney(String jId){
-        String sql = "DELETE FROM `journey` WHERE jId="+jId+"";
+    public static void deleteConsume(String cId){
+        String sql = "DELETE FROM `consume` WHERE cId="+cId+"";
         dbManager.DBexecuteUpdate(sql);
     }
 

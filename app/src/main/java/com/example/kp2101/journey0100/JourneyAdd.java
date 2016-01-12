@@ -70,7 +70,7 @@ public class JourneyAdd  extends AppCompatActivity {
         btnAddJ = (Button) findViewById(R.id.btnAddJ);
         edtJName = (EditText) findViewById(R.id.edtJName);
 
-        ivAddPic.setImageResource(R.drawable.ic_insert_photo_white_48dp);
+        ivAddPic.setImageResource(android.R.drawable.ic_menu_gallery);
 
         ivAddPic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,15 +112,15 @@ public class JourneyAdd  extends AppCompatActivity {
             Log.d("data", data.getDataString());
             imageUri = data.getData();
             //ivAddPic.setImageURI(imageUri);
-            //startActivityForResult(ImageSelector.doCrop(imageUri), ImageSelector.CROP_OK);
+            startActivityForResult(ImageSelector.doCrop(imageUri), ImageSelector.CROP_OK);
             //test
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                imageUri = ImageSelector.bitmapToFile(bitmap);
-                ivAddPic.setImageURI(imageUri);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+//                imageUri = ImageSelector.bitmapToFile(bitmap);
+//                ivAddPic.setImageURI(imageUri);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
             //test end
             //reduceImage();
 
